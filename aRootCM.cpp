@@ -8,7 +8,7 @@
 #include <TLegend.h>
 
 int main() {
-  double cut = 400;
+  double cut = 600;
   int population = 10000;
 
   TGraph *graph_S = new TGraph("Data/ResultCM.txt", "%lg %lg");

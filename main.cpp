@@ -47,10 +47,10 @@ int main() {
   int population_size = 10000;
   double initial_infected = 0.5 / 100;
   double B = 0.05;
-  double Y = 0;
-  double R = 0.107;
-  double Musk_trigger = 0;
-  double Quar_trigger = 0;
+  double Y = 0.1;
+  double R = 0.007;
+  double Musk_trigger = 0.20;
+  double Quar_trigger = 0.16;
   int Vacc_trigger = 0;
 
   std::ofstream file{"Data/Result.txt", std::ofstream::trunc};
@@ -60,9 +60,9 @@ int main() {
   PandemicCM sampleCM(sample, Musk_trigger, Quar_trigger, Vacc_trigger);
   sampleCM.setMusk_B_effect(0.8);
   sampleCM.setVacc_B_effect(0.8);
-  sampleCM.setVacc_Y_effect(1.5);
-  sampleCM.setVacc_R_effect(0.33);
-  sampleCM.setQuar_goal(0.05);
+  sampleCM.setVacc_Y_effect(1.2);
+  sampleCM.setVacc_R_effect(0.80);
+  sampleCM.setQuar_goal(0.04);
 
   int day = 0;
   int dayCM = 0;
@@ -83,7 +83,7 @@ int main() {
       write(fileCM, sampleCM, dayCM);
     }
     print(sample, sampleCM, day, dayCM);
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    //std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
   std::cout << '\n' << '\n';
 };
