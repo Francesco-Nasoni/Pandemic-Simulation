@@ -5,7 +5,7 @@ enum class State : char { Susceptible, Infected, Dead };
 
 class Person {
 private:
-  State state;
+  State state; 
   int sociality;
 
 public:

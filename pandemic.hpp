@@ -16,13 +16,12 @@ protected:
   int D = 0;
 
 public:
-  Pandemic(int, double, double, double, double);
-  Pandemic(Pandemic const &);
+  Pandemic(int, double, double, double, double, double);
   int getSusceptible() const;
   int getInfected() const;
   int getDead() const;
   int getPeopleN() const;
-  Pandemic evolve(Pandemic const &);
+  Pandemic evolve();
 };
 
 #endif

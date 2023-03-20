@@ -78,7 +78,7 @@ int main() {
   leg1->Draw("same");
   canva1->Print("Data/Graph.pdf");
 
-  TCanvas *canva2 = new TCanvas("c1", "", 1920, 1080);
+  TCanvas *canva2 = new TCanvas("c2", "", 1920, 1080);
   canva2->SetGrid();
   graph_Sr->Draw("AC");
   graph_Ir->Draw("C Same");

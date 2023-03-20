@@ -2,8 +2,8 @@
 #include <cassert>
 #include <random>
 
-PandemicCM::PandemicCM(Pandemic const &p, double m, double q, int v)
-    : Pandemic(p), Musk_trigger{m}, Quar_trigger{q}, Vacc_trigger{v} {};
+PandemicCM::PandemicCM(const Pandemic& p, double m, double q, int v)
+    : Pandemic(p), Musk_trigger{m}, Quar_trigger{q}, Vacc_trigger{v} {}
 
 void PandemicCM::setMusk_B_effect(double a) { Musk_B_effect = a; }
 
@@ -15,15 +15,15 @@ void PandemicCM::setVacc_R_effect(double a) { Vacc_R_effect = a; }
 
 void PandemicCM::setQuar_goal(double a) { Quar_goal = a; }
 
-PandemicCM PandemicCM::evolveCM(PandemicCM const &current, int d) {
+PandemicCM PandemicCM::evolveCM(int d) {
   std::default_random_engine gen{std::random_device{}()};
   std::uniform_real_distribution<double> uniform_0(0, 1);
   std::uniform_int_distribution<int> uniform_1(0, N - 1);
 
-  PandemicCM next = current;
+  PandemicCM next = *this;
 
   int j = 0;
-  for (auto const &v : current.population) {
+  for (auto const &v : population) {
     double b = B;
     double y = Y;
     double r = R;
