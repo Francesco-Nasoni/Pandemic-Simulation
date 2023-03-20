@@ -31,7 +31,6 @@
 *.out
 *.app
 
-Data/*.pdf
 Plot
 realtimeplot
 an.cpp
