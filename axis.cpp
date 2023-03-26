@@ -1,6 +1,4 @@
 #include "axis.hpp"
-#include <iostream>
-#include <cassert>
 
 Axis::Axis(double max, double length, double width, int nDiv, sf::Color color,
            double x, double y, Direction d)

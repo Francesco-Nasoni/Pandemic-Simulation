@@ -3,6 +3,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "axis.hpp"
+#include <cmath>
 
 class Graph{
     private:

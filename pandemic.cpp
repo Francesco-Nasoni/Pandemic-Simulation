@@ -14,6 +14,8 @@ Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
       throw std::runtime_error{"N must be greater than 0"};
   if ( social < 1)
       throw std::runtime_error{"Sociality must be grater or equal to 1"};
+  if( i <= 0)
+      throw std::runtime_error{"Percentage of initial infected must be greater than 0"};
 
   S = N;
   std::default_random_engine gen{std::random_device{}()};

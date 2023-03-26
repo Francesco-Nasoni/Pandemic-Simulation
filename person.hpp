@@ -1,7 +1,7 @@
 #ifndef PERSON_HPP
 #define PERSON_HPP
 
-enum class State : char { Susceptible, Infected, Dead };
+enum class State { Susceptible, Infected, Dead };
 
 class Person {
 private:

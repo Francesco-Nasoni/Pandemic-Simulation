@@ -1,5 +1,4 @@
 #include "graph.hpp"
-#include <cmath>
 
 Graph::Graph(sf::RenderWindow& m_window, double max_x, double max_y, int n) 
     :window{m_window}, max_x{max_x}, max_y{max_y}, x_exst{1}, y_exst{1}, n{n}

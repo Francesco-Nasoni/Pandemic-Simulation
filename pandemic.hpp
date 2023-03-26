@@ -21,6 +21,7 @@ public:
   int getInfected() const;
   int getDead() const;
   int getPeopleN() const;
+  bool isEnded()const;
   Pandemic evolve();
 };
 
