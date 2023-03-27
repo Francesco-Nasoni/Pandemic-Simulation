@@ -1,0 +1,6 @@
+g++ main.cpp person.cpp pandemic.cpp pandemicCM.cpp graph.cpp utilities.cpp axis.cpp -O3 -Wall -Wextra  
+#g++ aRoot.cpp -o analysis.out `root-config --cflags --glibs`
+#g++ aRootCM.cpp -o analysisCM.out `root-config --cflags --glibs`
+./a.out
+#./analysis.out
+#./analysisCM.out

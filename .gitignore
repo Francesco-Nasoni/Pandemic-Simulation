@@ -31,10 +31,8 @@
 *.out
 *.app
 
-Data/*.pdf
+#useless folder
+./Data
 Plot
-realtimeplot
-an.cpp
-aRootCM.cpp
-aRoot.cpp
+Pro2
 .vscode
