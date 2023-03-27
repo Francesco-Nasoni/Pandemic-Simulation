@@ -32,7 +32,7 @@
 *.app
 
 #useless folder
-./Data
+Data1
 Plot
 Pro2
 .vscode
