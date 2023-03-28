@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/aaa/pandemic/Versione_2/axis.cpp
-axis.hpp
-/home/aaa/pandemic/Versione_2/axis.hpp
-
 /home/aaa/pandemic/Versione_2/axis.hpp
 SFML/Graphics.hpp
 -
@@ -19,10 +15,6 @@ vector
 -
 cassert
 -
-
-/home/aaa/pandemic/Versione_2/graph.cpp
-graph.hpp
-/home/aaa/pandemic/Versione_2/graph.hpp
 
 /home/aaa/pandemic/Versione_2/graph.hpp
 SFML/Graphics.hpp
@@ -58,41 +50,11 @@ person.hpp
 vector
 -
 
-/home/aaa/pandemic/Versione_2/pandemic1.cpp
-algorithm
--
-iostream
--
-random
--
-pandemic.hpp
-/home/aaa/pandemic/Versione_2/pandemic.hpp
-
 /home/aaa/pandemic/Versione_2/pandemicCM.hpp
 pandemic.hpp
 /home/aaa/pandemic/Versione_2/pandemic.hpp
 
-/home/aaa/pandemic/Versione_2/pandemicCM1.cpp
-pandemicCM.hpp
-/home/aaa/pandemic/Versione_2/pandemicCM.hpp
-algorithm
--
-cassert
--
-iostream
--
-random
--
-
-/home/aaa/pandemic/Versione_2/person.cpp
-person.hpp
 /home/aaa/pandemic/Versione_2/person.hpp
-
-/home/aaa/pandemic/Versione_2/person.hpp
-
-/home/aaa/pandemic/Versione_2/utilities.cpp
-utilities.hpp
-/home/aaa/pandemic/Versione_2/utilities.hpp
 
 /home/aaa/pandemic/Versione_2/utilities.hpp
 graph.hpp

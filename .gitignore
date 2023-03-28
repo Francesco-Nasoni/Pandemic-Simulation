@@ -32,6 +32,7 @@
 *.app
 
 #useless folder
+build
 Data1
 Plot
 Pro2
