@@ -31,12 +31,9 @@
 *.out
 *.app
 
-<<<<<<< .merge_file_97TBuN
 #useless folder
 build
 Data1
-=======
->>>>>>> .merge_file_TMTB8P
 Plot
 Pro2
 .vscode
