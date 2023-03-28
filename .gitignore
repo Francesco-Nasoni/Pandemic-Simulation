@@ -31,9 +31,12 @@
 *.out
 *.app
 
+<<<<<<< .merge_file_T7vLI9
 #useless folder
 build
 Data1
+=======
+>>>>>>> .merge_file_uVrOrc
 Plot
 Pro2
 .vscode
