@@ -9,7 +9,7 @@ Per buildare:
 
 Per eseguire il programma:
 
-`./buildepidemic`
+`./build/epidemic`
 
 Per eseguire i tests:
 
