@@ -15,4 +15,3 @@ Per eseguire i tests:
 
 `./build/epidemic.t`
 
-`sh simulation.sh`
