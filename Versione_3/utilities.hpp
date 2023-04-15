@@ -14,8 +14,8 @@
 #define FIXED_FLOAT(x) std::fixed << std::setprecision(x)
 #define SPACE(x) std::left << std::setw(x)
 
-namespace ut
-{
+namespace ut {
+Pandemic configuration();
 void render(sf::RenderWindow &window, Graph &graph);
 void add_point(Graph &graph, Pandemic const &p, int d);
 void proces_event(sf::RenderWindow &window, sf ::Event const &event);
