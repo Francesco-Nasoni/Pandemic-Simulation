@@ -19,9 +19,9 @@ public:
   PandemicCM(const Pandemic &, double, double, double);
   void die_or_live(int index, PandemicCM &next) const;
   void infect(int i_1, int i_2, PandemicCM &next) const;
-  void toggle_quar(bool);
-  void toggle_vacc_1(bool);
-  void toggle_vacc_2(bool);
+  void toggle_quar();
+  void toggle_vacc_1();
+  void toggle_vacc_2();
   PandemicCM evolve() const;
   PandemicCM evolveCM() const;
 };

@@ -1,33 +1,5 @@
 #include "utilities.hpp"
 
-Pandemic ut::configuration() {
-  std::vector<double> val;
-  std::ifstream file("config.txt");
-  for (;;) {
-    std::string line;
-    if (!std::getline(file, line))
-      break;
-
-    std::string row;
-    std::size_t pos = line.find_last_of('=');
-    if ((line.find_first_of('#') != line.find_first_not_of("\t ") ||
-         line.find_first_of('#') == std::string::npos) &&
-        pos != std::string::npos) {
-      row = line.substr(pos + 2);
-
-      if (row.find_first_not_of("1234567890.") != std::string::npos)
-        throw std::runtime_error{"Invalid setting.txt"};
-
-      val.push_back(stod(row));
-      std::cout << val.back() << '\n';
-    }
-  }
-
-  // Pandemic p;
-
-  return ;
-}
-
 void ut::render(sf::RenderWindow &window, Graph &graph) {
   window.clear(sf::Color::White);
   graph.draw();
@@ -45,10 +17,22 @@ void ut::add_point(Graph &graph, Pandemic const &p, int d) {
   graph.addPoint(sf::Vector2f(d, p.get_dead()), 3);
 }
 
-void ut::proces_event(sf::RenderWindow &window, sf ::Event const &event) {
+void ut::proces_event(sf::RenderWindow &window, sf ::Event const &event, PandemicCM& p, bool auto_mode) {
   if (event.type == sf::Event::KeyPressed) {
-    if (event.key.code == sf::Keyboard::Escape)
-      window.close();
+    if(!auto_mode){
+        switch (event.type)
+        {
+        case sf::Keyboard::Q:
+            p.toggle_quar();
+            break;
+        case sf::Keyboard::V:
+            p.toggle_vacc_1();
+            
+        default:
+            break;
+        }
+    }
+
   } else if (event.type == sf::Event::Closed)
     window.close();
 }

@@ -17,7 +17,8 @@ int main() {
   double R = 0.007;
   double sociality = 4;
   double initial_infected = 0.5 / 100.;
-  int quar_trigger = 0.13;
+  double quar_trigger = 0.13;
+  double quar_goal = 0.23;
   int vacc_1_trigger = 0;
   int vacc_2_trigger = 0;
   double vacc_B_effect = 0.8;
@@ -67,10 +68,10 @@ int main() {
 
     sf::Event event;
     while (window.pollEvent(event))
-      ut::proces_event(window, event);
+      ut::proces_event(window, event, sample_CM);
 
     while (window_CM.pollEvent(event))
-      ut::proces_event(window_CM, event);
+      ut::proces_event(window_CM, event, sample_CM);
 
     if (!sample.is_ended()) {
       day++;

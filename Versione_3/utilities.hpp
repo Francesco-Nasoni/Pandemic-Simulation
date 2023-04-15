@@ -15,10 +15,10 @@
 #define SPACE(x) std::left << std::setw(x)
 
 namespace ut {
-Pandemic configuration();
+//Pandemic configuration();
 void render(sf::RenderWindow &window, Graph &graph);
 void add_point(Graph &graph, Pandemic const &p, int d);
-void proces_event(sf::RenderWindow &window, sf ::Event const &event);
+void proces_event(sf::RenderWindow &window, sf ::Event const &event, PandemicCM& p);
 void write(std::ostream &os, Pandemic const &sample, int d);
 void print(Pandemic const &s1, Pandemic const &s2, int d1, int d2);
 } // namespace ut

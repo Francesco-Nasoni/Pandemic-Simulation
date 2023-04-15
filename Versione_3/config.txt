@@ -47,5 +47,8 @@ Attivazione vaccinazione 1= 200
 
 Attivazione vaccinazione 2= 400
 
-#   I seguenti valori sono moltiplicativi dei B,Y,R
+#   I seguenti valori sono moltiplicativi dei parametri B,Y,R
 
+Influenza sul valore B= 0.8
+Influenza sul valore Y= 1.2
+Influenza sul valore R= 0.8
