@@ -11,20 +11,22 @@
 
 int main() {
 
-  int population_size = 10000; // unica riusata per ora
-  double B = 0.05;
-  double Y = 0.1;
-  double R = 0.007;
-  double sociality = 4;
-  double initial_infected = 0.5 / 100.;
+  int population_size = 10000;
+
+  bool auto_mode = false;
   double quar_trigger = 0.13;
   double quar_goal = 0.23;
+  int quar_max_n = 5;
   int vacc_1_trigger = 0;
   int vacc_2_trigger = 0;
-  double vacc_B_effect = 0.8;
-  double vacc_Y_effect = 1.2;
-  double vacc_R_effect = 0.8;
-  bool auto_mode = false;
+
+  int quar_count = 0;
+
+  Pandemic sample;
+  PandemicCM sample_CM;
+
+  ut::configuration(sample, sample_CM, auto_mode, quar_trigger, quar_goal,
+                    quar_max_n, vacc_1_trigger, vacc_2_trigger);
 
   std::ofstream file{"Data/Result.txt", std::ofstream::trunc};
   std::ofstream fileCM{"Data/ResultCM.txt", std::ofstream::trunc};
@@ -38,9 +40,6 @@ int main() {
       "Pandemic Similation with CM", sf::Style::Close};
   window.setPosition(sf::Vector2i(0, 0));
   window_CM.setPosition(sf::Vector2i(desktop.width / 2, 0));
-
-  Pandemic sample(population_size, B, Y, R, sociality, initial_infected);
-  PandemicCM sample_CM(sample, quar_trigger, vacc_1_trigger, vacc_2_trigger);
 
   Graph graph(window, 50., population_size, 3);
   graph.setColor(sf::Color::Red, 2);
@@ -68,10 +67,10 @@ int main() {
 
     sf::Event event;
     while (window.pollEvent(event))
-      ut::proces_event(window, event, sample_CM);
+      ut::proces_event(window, event, sample_CM, auto_mode);
 
     while (window_CM.pollEvent(event))
-      ut::proces_event(window_CM, event, sample_CM);
+      ut::proces_event(window_CM, event, sample_CM, auto_mode);
 
     if (!sample.is_ended()) {
       day++;
@@ -79,6 +78,21 @@ int main() {
       ut::write(file, sample, day);
     }
     if (!sample_CM.is_ended()) {
+      if (auto_mode) {
+        if (static_cast<double>(sample_CM.get_infected()) /
+                    (static_cast<double>(sample_CM.get_susceptible()) +
+                     static_cast<double>(sample_CM.get_infected())) >=
+                quar_trigger &&
+            quar_trigger != 0 && quar_count < quar_max_n) {
+          sample_CM.toggle_quar();
+        }
+        if (day_CM >= vacc_1_trigger && vacc_1_trigger != 0) {
+          sample_CM.toggle_vacc_1();
+        }
+        if (day_CM >= vacc_2_trigger && vacc_2_trigger != 0) {
+          sample_CM.toggle_vacc_2();
+        }
+      }
       day_CM++;
       sample_CM = sample_CM.evolveCM();
       ut::write(fileCM, sample_CM, day_CM);

@@ -60,24 +60,24 @@ int main() {
   std::chrono::time_point<std::chrono::steady_clock> end;
   std::chrono::duration<double, std::milli> duration;
 
-  while (window.isOpen() || window_CM.isOpen() || !sample.isEnded() ||
-         !sample_CM.isEnded()) {
+  while (window.isOpen() || window_CM.isOpen() || !sample.is_ended() ||
+         !sample_CM.is_ended()) {
     
     start = std::chrono::steady_clock::now();
 
     sf::Event event;
     while (window.pollEvent(event))
-      ut::procesEvent(window, event);
+      ut::proces_event(window, event);
 
     while (window_CM.pollEvent(event))
-      ut::procesEvent(window_CM, event);
+      ut::proces_event(window_CM, event);
 
-    if (!sample.isEnded()) {
+    if (!sample.is_ended()) {
       day++;
       sample = sample.evolve();
       ut::write(file, sample, day);
     }
-    if (!sample_CM.isEnded()) {
+    if (!sample_CM.is_ended()) {
       day_CM++;
       sample_CM = sample_CM.evolveCM(day_CM);
       ut::write(fileCM, sample_CM, day_CM);
@@ -85,8 +85,8 @@ int main() {
     
     ut::print(sample, sample_CM, day, day_CM);
 
-    ut::addPoint(graph, sample, day);
-    ut::addPoint(graph_CM, sample_CM, day_CM);
+    ut::add_point(graph, sample, day);
+    ut::add_point(graph_CM, sample_CM, day_CM);
 
     ut::render(window, graph);
     ut::render(window_CM, graph_CM);

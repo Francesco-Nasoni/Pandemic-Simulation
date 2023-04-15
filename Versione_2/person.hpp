@@ -9,10 +9,10 @@ private:
   int sociality;
 
 public:
-  int getSocial() const;
-  State getState() const;
-  void setState(State);
-  void setSocial(int);
+  int get_social() const;
+  State get_state() const;
+  void set_state(State);
+  void set_social(int);
   Person();
 };
 

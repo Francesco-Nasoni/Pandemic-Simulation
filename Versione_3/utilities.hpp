@@ -14,11 +14,18 @@
 #define FIXED_FLOAT(x) std::fixed << std::setprecision(x)
 #define SPACE(x) std::left << std::setw(x)
 
+struct Samples {
+  Pandemic normal;
+  PandemicCM c_measure;
+};
+
 namespace ut {
-//Pandemic configuration();
+void configuration(Pandemic &p1, Pandemic &p2, bool &a_m, double &q_t,
+                   double &q_g, int &q_m_n, int &v_1_t, int &v_2_t);
 void render(sf::RenderWindow &window, Graph &graph);
 void add_point(Graph &graph, Pandemic const &p, int d);
-void proces_event(sf::RenderWindow &window, sf ::Event const &event, PandemicCM& p);
+void proces_event(sf::RenderWindow &window, sf ::Event const &event,
+                  PandemicCM &p, bool auto_mode);
 void write(std::ostream &os, Pandemic const &sample, int d);
 void print(Pandemic const &s1, Pandemic const &s2, int d1, int d2);
 } // namespace ut

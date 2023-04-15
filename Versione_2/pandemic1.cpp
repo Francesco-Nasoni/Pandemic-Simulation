@@ -25,26 +25,26 @@ Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
 
   for (auto &v : population) {
     do {
-      v.setSocial(std::round(dist_0(gen)));
-    } while (v.getSocial() < 1);
+      v.set_social(std::round(dist_0(gen)));
+    } while (v.get_social() < 1);
 
     if (dist_1(gen) < i) {
-      v.setState(State::Infected);
+      v.set_state(State::Infected);
       S--;
       I++;
     }
   }
 }
 
-int Pandemic::getSusceptible() const { return S; }
+int Pandemic::get_susceptible() const { return S; }
 
-int Pandemic::getInfected() const { return I; }
+int Pandemic::get_infected() const { return I; }
 
-int Pandemic::getDead() const { return D; }
+int Pandemic::get_dead() const { return D; }
 
-int Pandemic::getPeopleN() const { return N; }
+int Pandemic::get_N() const { return N; }
 
-bool Pandemic::isEnded() const{
+bool Pandemic::is_ended() const{
   if( I == 0)
     return 1;
   else if (Y==0 && R==0 && S == 0)
@@ -62,11 +62,10 @@ Pandemic Pandemic::evolve() {
   std::vector<Person>::iterator current_it;
   std::vector<Person>::iterator next_it;
   std::vector<Person>::iterator start_it = population.begin();
-  //std::vector<Person>::iterator next_begin = next.population.begin();
 
   while (true) {
     current_it = std::find_if(start_it, population.end(), [](Person p) -> bool {
-      return p.getState() == State::Infected;
+      return p.get_state() == State::Infected;
     });
 
     if (current_it == population.end())
@@ -75,21 +74,21 @@ Pandemic Pandemic::evolve() {
     start_it = current_it + 1;
     next_it = next.population.begin() + std::distance(population.begin(), current_it);
 
-    for (int j = 0; j < current_it->getSocial(); j++) {
-      int r = uniform_1(gen); // aggiungere che non interagisce con se stesso
+    for (int j = 0; j < current_it->get_social(); j++) {
+      int r = uniform_1(gen);
       if (uniform_0(gen) < B &&
-          next.population[r].getState() == State::Susceptible && population[r].getState() == State::Susceptible) {
-        next.population[r].setState(State::Infected);
+          next.population[r].get_state() == State::Susceptible && population[r].get_state() == State::Susceptible) {
+        next.population[r].set_state(State::Infected);
         next.S--;
         next.I++;
       }
     }
     if (uniform_0(gen) < Y) {
-      next_it->setState(State::Susceptible);
+      next_it->set_state(State::Susceptible);
       next.S++;
       next.I--;
     } else if (uniform_0(gen) < R) {
-      next_it->setState(State::Dead);
+      next_it->set_state(State::Dead);
       next.I--;
       next.D++;
     }

@@ -82,7 +82,7 @@ TEST_CASE("Performances of evolve") {
     std::cout << "\nTime for update the graph in the begining is about ";
     {
       Timer timer;
-      ut::addPoint(graph, sample, 0);
+      ut::add_point(graph, sample, 0);
       ut::render(window, graph);
     }
   }
@@ -97,16 +97,16 @@ TEST_CASE("Performances of evolve") {
     graph.setColor(sf::Color::Green, 3);
 
     int i = 0;
-    while (sample.getInfected() > 0) {
+    while (sample.get_infected() > 0) {
       sample = sample.evolve();
-      ut::addPoint(graph, sample, i);
+      ut::add_point(graph, sample, i);
       i++;
     }
     ut::render(window, graph);
     std::cout << "\nTime for update the graph in the end is about ";
     {
       Timer timer;
-      ut::addPoint(graph, sample, i);
+      ut::add_point(graph, sample, i);
       ut::render(window, graph);
     }
   }

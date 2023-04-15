@@ -69,9 +69,15 @@ void PandemicCM::infect(int i_1, int i_2, PandemicCM &next) const {
 
 void PandemicCM::toggle_quar() { Quar = !Quar; };
 
-void PandemicCM::toggle_vacc_1() { if(!vacc_1)vacc_1 = !vacc_1; };
+void PandemicCM::toggle_vacc_1() {
+  if (!vacc_1)
+    vacc_1 = !vacc_1;
+};
 
-void PandemicCM::toggle_vacc_2() { if(!vacc_1)vacc_2 = !vacc_2; };
+void PandemicCM::toggle_vacc_2() {
+  if (!vacc_2)
+    vacc_2 = !vacc_2;
+};
 
 PandemicCM PandemicCM::evolve() const {
   std::default_random_engine gen{std::random_device{}()};

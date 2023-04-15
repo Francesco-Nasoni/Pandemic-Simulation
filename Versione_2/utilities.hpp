@@ -16,8 +16,8 @@
 
 namespace ut{
     void render(sf::RenderWindow &window, Graph &graph);
-    void addPoint(Graph &graph, Pandemic const &p, int d);
-    void procesEvent(sf::RenderWindow &window, sf ::Event const &event);
+    void add_point(Graph &graph, Pandemic const &p, int d);
+    void proces_event(sf::RenderWindow &window, sf ::Event const &event);
     void write(std::ostream &os, Pandemic const &sample, int d);
     void print(Pandemic const &s1, Pandemic const &s2, int d1, int d2);
 }

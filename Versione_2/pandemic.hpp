@@ -17,11 +17,11 @@ protected:
 
 public:
   Pandemic(int, double, double, double, double, double);
-  int getSusceptible() const;
-  int getInfected() const;
-  int getDead() const;
-  int getPeopleN() const;
-  bool isEnded()const;
+  int get_susceptible() const;
+  int get_infected() const;
+  int get_dead() const;
+  int get_N() const;
+  bool is_ended()const;
   Pandemic evolve();
 };
 

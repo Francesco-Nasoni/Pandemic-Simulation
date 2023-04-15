@@ -14,10 +14,11 @@ protected:
   int S;
   int I = 0;
   int D = 0;
-  int m_social;
+  double m_social;
 
 public:
   Pandemic(int, double, double, double, double, double);
+  Pandemic(){};
   int get_susceptible() const;
   int get_infected() const;
   int get_dead() const;

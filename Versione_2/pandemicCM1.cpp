@@ -50,7 +50,7 @@ PandemicCM PandemicCM::evolveCM(int d) {
 
   while (true) {
     current_it = std::find_if(start_it, population.end(), [](Person p) -> bool {
-      return p.getState() == State::Infected;
+      return p.get_state() == State::Infected;
     });
 
     if (current_it == population.end())
@@ -60,10 +60,10 @@ PandemicCM PandemicCM::evolveCM(int d) {
     next_it =  next.population.begin() + std::distance(population.begin(), current_it);
 
     if ((IS < Quar_trigger || Quar_trigger == 0) && Quar == 0) {
-      for (int j = 0; j < next_it->getSocial(); j++) {
+      for (int j = 0; j < next_it->get_social(); j++) {
         int r = uniform_1(gen);
-        if (uniform_0(gen) < b && next.population[r].getState() == State::Susceptible && population[r].getState() == State::Susceptible) {
-          next.population[r].setState(State::Infected);
+        if (uniform_0(gen) < b && next.population[r].get_state() == State::Susceptible && population[r].get_state() == State::Susceptible) {
+          next.population[r].set_state(State::Infected);
           next.S--;
           next.I++;
         }
@@ -74,11 +74,11 @@ PandemicCM PandemicCM::evolveCM(int d) {
       next.Quar = 0;
 
     if (uniform_0(gen) < y) {
-      next_it->setState(State::Susceptible);
+      next_it->set_state(State::Susceptible);
       next.S++;
       next.I--;
     } else if (uniform_0(gen) < r) {
-      next_it->setState(State::Dead);
+      next_it->set_state(State::Dead);
       next.I--;
       next.D++;
     }

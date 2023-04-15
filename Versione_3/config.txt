@@ -1,8 +1,8 @@
-#   Questo è il file di configurazione della simulazione
+#   QUESTO È IL FILE DI CONFIGURAZIONE DELLA SIMULAZIONE
 #   L'ordine in cui vengono impostate le variabili è quello che conta
-#   Va usato la segente sintassi:
+#   Va usato la seguente sintassi:
 #       "testo_non_considerato"= 000
-#   NOTA:   Se il valore richiesto dal parametro deve essere intere il valore
+#   NOTA:   Se il valore richiesto dal parametro deve essere intero il valore
 #           viene arrotondato 
 
 #   PARAMETRI DELLA POPOLAZIONE
@@ -27,8 +27,8 @@ Valore percentuale del numero di infetti iniziale= 0.005
 Modalità automatica: 0
 
 #   I valori di attivazione/disattivazione vengono interpretati come
-#   numero di infetti che una volta raggiunto attiva l'azione
-#   NOTA: settare a 0 l'attivazione per non farla attivare mai
+#   percentuale di infetti su vivi
+#   NOTA: settare a 0 per non farla attivare mai
 
 Attivazione quarantena= 3000;
 Disattivazione quarantena = 1000;
@@ -36,7 +36,7 @@ Numero massimo di quarantene = 4;
 
 #   I valori di attivazione dei vaccini vengono interpretati come giorno
 #   in cui attivare la vaccinazione
-#   NOTA: settare a 0 l'attivaizone per non farle attivare mai
+#   NOTA: settare a 0 per non farle attivare mai
 
 #   Modalità 1 è la modalità in cui vengono vaccinati solo gli individui
 #   con socialità più alta della media
