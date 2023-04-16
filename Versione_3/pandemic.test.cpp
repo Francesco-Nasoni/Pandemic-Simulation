@@ -75,8 +75,8 @@ TEST_CASE("Performances of evolve") {
     Pandemic sample(10000, 0.05, 0.1, 0.007, 4, 0.5 / 100.);
 
     Graph graph(window, 50., 10000, 3);
-    graph.setColor(sf::Color::Red, 2);
-    graph.setColor(sf::Color::Green, 3);
+    graph.set_color(sf::Color::Red, 2);
+    graph.set_color(sf::Color::Green, 3);
     ut::render(window, graph);
 
     std::cout << "\nTime for update the graph in the begining is about ";
@@ -93,8 +93,8 @@ TEST_CASE("Performances of evolve") {
     Pandemic sample(10000, 0.05, 0.1, 0.007, 4, 0.5 / 100.);
 
     Graph graph(window, 50., 10000, 3);
-    graph.setColor(sf::Color::Red, 2);
-    graph.setColor(sf::Color::Green, 3);
+    graph.set_color(sf::Color::Red, 2);
+    graph.set_color(sf::Color::Green, 3);
 
     int i = 0;
     while (sample.get_infected() > 0) {

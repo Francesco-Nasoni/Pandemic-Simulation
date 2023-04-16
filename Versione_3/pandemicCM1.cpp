@@ -9,9 +9,9 @@ PandemicCM::PandemicCM(const Pandemic &p, double V_B_E, double V_Y_E,
                        double V_R_E)
     : Pandemic(p), vacc_B_effect{V_B_E}, vacc_Y_effect{V_Y_E}, vacc_R_effect{
                                                                    V_R_E} {
-  if (V_B_E < 0  || V_Y_E < 0 || V_R_E < 0 )
+  if (V_B_E < 0 || V_Y_E < 0 || V_R_E < 0)
     throw std::runtime_error{
-        "The effects of countermeasure are multiplicative factor," 
+        "The effects of countermeasure are multiplicative factor,"
         "they must be positive or zero"};
 }
 
@@ -119,7 +119,7 @@ PandemicCM PandemicCM::evolveCM() const {
     PandemicCM next = *this;
     for (int i = 0; i < N; i = i + 10) {
       for (int j = 0; j < 2; j++) {
-        if (population[i + j].get_state() == State::Infected){
+        if (population[i + j].get_state() == State::Infected) {
           for (int l = 0; l < 2; l++) {
             int index = uniform_1(gen) * 10 + uniform_2(gen);
             infect(i + j, index, next);
@@ -130,7 +130,7 @@ PandemicCM PandemicCM::evolveCM() const {
 
     for (int i = 0; i < N; i = i + 10) {
       for (int j = 0; j < 10; j++) {
-        if (population[i + j].get_state() == State::Infected){
+        if (population[i + j].get_state() == State::Infected) {
           for (int l = 0; l < 2; l++) {
             int index = i + uniform_3(gen);
             infect(i + j, index, next);

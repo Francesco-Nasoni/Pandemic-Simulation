@@ -11,22 +11,19 @@
 
 int main() {
 
-  int population_size = 10000;
-
-  bool auto_mode = false;
-  double quar_trigger = 0.13;
-  double quar_goal = 0.23;
-  int quar_max_n = 5;
-  int vacc_1_trigger = 0;
-  int vacc_2_trigger = 0;
-
+  int pop_size;
+  bool auto_mode;
+  double quar_trigger;
+  double quar_goal;
+  int quar_max_n;
+  int vacc_1_trigger;
+  int vacc_2_trigger;
   int quar_count = 0;
-
   Pandemic sample;
   PandemicCM sample_CM;
 
-  ut::configuration(sample, sample_CM, auto_mode, quar_trigger, quar_goal,
-                    quar_max_n, vacc_1_trigger, vacc_2_trigger);
+  ut::configuration(sample, sample_CM, pop_size, auto_mode, quar_trigger,
+                    quar_goal, quar_max_n, vacc_1_trigger, vacc_2_trigger);
 
   std::ofstream file{"Data/Result.txt", std::ofstream::trunc};
   std::ofstream fileCM{"Data/ResultCM.txt", std::ofstream::trunc};
@@ -41,13 +38,13 @@ int main() {
   window.setPosition(sf::Vector2i(0, 0));
   window_CM.setPosition(sf::Vector2i(desktop.width / 2, 0));
 
-  Graph graph(window, 50., population_size, 3);
-  graph.setColor(sf::Color::Red, 2);
-  graph.setColor(sf::Color::Green, 3);
+  Graph graph(window, 50., pop_size, 3);
+  graph.set_color(sf::Color::Red, 2);
+  graph.set_color(sf::Color::Green, 3);
 
-  Graph graph_CM(window_CM, 50., population_size, 3);
-  graph_CM.setColor(sf::Color::Red, 2);
-  graph_CM.setColor(sf::Color::Green, 3);
+  Graph graph_CM(window_CM, 50., pop_size, 3);
+  graph_CM.set_color(sf::Color::Red, 2);
+  graph_CM.set_color(sf::Color::Green, 3);
 
   int day = 0;
   int day_CM = 0;

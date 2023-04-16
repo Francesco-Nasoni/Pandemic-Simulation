@@ -20,8 +20,9 @@ struct Samples {
 };
 
 namespace ut {
-void configuration(Pandemic &p1, PandemicCM &p2, bool &a_m, double &q_t,
-                   double &q_g, int &q_m_n, int &v_1_t, int &v_2_t);
+void configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
+                   double &q_t, double &q_g, int &q_m_n, int &v_1_t,
+                   int &v_2_t);
 void render(sf::RenderWindow &window, Graph &graph);
 void add_point(Graph &graph, Pandemic const &p, int d);
 void proces_event(sf::RenderWindow &window, sf ::Event const &event,

@@ -1,7 +1,8 @@
 #include "utilities.hpp"
 
-void ut::configuration(Pandemic &p1, PandemicCM &p2, bool &a_m, double &q_t,
-                   double &q_g, int &q_m_n, int &v_1_t, int &v_2_t) {
+void ut::configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
+                       double &q_t, double &q_g, int &q_m_n, int &v_1_t,
+                       int &v_2_t) {
   std::ifstream file("config.txt");
   std::string line;
   std::vector<double> val;
@@ -9,21 +10,24 @@ void ut::configuration(Pandemic &p1, PandemicCM &p2, bool &a_m, double &q_t,
     std::string row;
     std::size_t pos = line.find_last_of('=');
     if ((line.find_first_of('#') != line.find_first_not_of("\t ") ||
-        line.find_first_of('#') == std::string::npos) &&
-            pos != std::string::npos) {
+         line.find_first_of('#') == std::string::npos) &&
+        pos != std::string::npos) {
       row = line.substr(pos + 2);
 
       if (row.find_first_not_of("1234567890.") != std::string::npos)
-        throw std::runtime_error{"Invalid variables in setting.txt"};
+        throw std::runtime_error{"Invalid variables in config.txt"};
 
       val.push_back(stod(row));
     }
   }
   if (val.size() != 15)
-    throw std::runtime_error{"Invalid nuber of senttings in setting.txt"};
+    throw std::runtime_error{"Invalid nuber of senttings in config.txt"};
 
-  Pandemic c1(static_cast<int>(std::round(val[0])), val[1], val[2], val[3],
-              val[4], val[5]);
+  int num = static_cast<int>(std::round(val[0]));
+  int r_num = num % 10;
+  num = num + r_num;
+  p_s = num;
+  Pandemic c1(num, val[1], val[2], val[3], val[4], val[5]);
   PandemicCM c2(c1, val[12], val[13], val[14]);
 
   if (val[6] > 0)
@@ -48,14 +52,14 @@ void ut::render(sf::RenderWindow &window, Graph &graph) {
 }
 
 void ut::add_point(Graph &graph, Pandemic const &p, int d) {
-  double m_x = graph.getMax_x();
-  double m_y = graph.getMax_y();
+  double m_x = graph.get_max_x();
+  double m_y = graph.get_max_y();
   if (d > m_x) {
     graph.resize(m_x + 50, m_y);
   }
-  graph.addPoint(sf::Vector2f(d, p.get_susceptible()), 1);
-  graph.addPoint(sf::Vector2f(d, p.get_infected()), 2);
-  graph.addPoint(sf::Vector2f(d, p.get_dead()), 3);
+  graph.add_point(sf::Vector2f(d, p.get_susceptible()), 1);
+  graph.add_point(sf::Vector2f(d, p.get_infected()), 2);
+  graph.add_point(sf::Vector2f(d, p.get_dead()), 3);
 }
 
 void ut::proces_event(sf::RenderWindow &window, sf ::Event const &event,

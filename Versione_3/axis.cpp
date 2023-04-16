@@ -3,7 +3,9 @@
 Axis::Axis(double max, double length, double width, int nDiv, sf::Color color,
            double x, double y, Direction d)
     : color{color}, x{x}, y{y}, max{max}, length{length}, nDiv{nDiv}, dir{d} {
-  font.loadFromFile("arial.ttf");
+  if (!font.loadFromFile("arial.ttf")) {
+    throw std::runtime_error{"cannot load font, please download arial.ttf"};
+  }
 
   line.setSize(sf::Vector2f(length, width));
   line.setPosition(sf::Vector2f(x, y));
@@ -25,15 +27,19 @@ Axis::Axis(double max, double length, double width, int nDiv, sf::Color color,
 
     if (dir == Direction::x) {
       l = length / static_cast<double>(nDiv);
-      rec_dim = sf::Vector2f(width, 7 * width);
-      rec_pos = sf::Vector2f(i * l + x, y - 3 * width);
-      lab_pos = sf::Vector2f(i * l + x - getOffSetX(str, 16), y + 10);
+      rec_dim = sf::Vector2f(width, DIV_LENGTH * width);
+      rec_pos = sf::Vector2f(i * l + x, y - (DIV_LENGTH - 1) / 2 * width);
+      lab_pos = sf::Vector2f(i * l + x - get_lab_offset(str, FONT_SIZE) / 2 +
+                                 width / 2,
+                             y + DIV_LENGTH + LABEL_OFFSET);
     } else {
       l = width / static_cast<double>(nDiv);
-      rec_dim = sf::Vector2f(7 * length, length);
-      rec_pos = sf::Vector2f(x - 3 * length, -i * l + y + width);
-      lab_pos = sf::Vector2f(x - 10 - 3 * length - getOffSetY(str, 16.),
-                             -i * l + y + width - 8);
+      rec_dim = sf::Vector2f(DIV_LENGTH * length, length);
+      rec_pos =
+          sf::Vector2f(x - (DIV_LENGTH - 1) / 2 * length, -i * l + y + width);
+      lab_pos = sf::Vector2f(x - LABEL_OFFSET - (DIV_LENGTH - 1) / 2 * length -
+                                 get_lab_offset(str, FONT_SIZE),
+                             -i * l + y + width - FONT_SIZE / 2);
     }
 
     rec.setSize(rec_dim);
@@ -41,7 +47,7 @@ Axis::Axis(double max, double length, double width, int nDiv, sf::Color color,
     rec.setFillColor(color);
 
     tex.setString(str);
-    tex.setCharacterSize(16);
+    tex.setCharacterSize(FONT_SIZE);
     tex.setPosition(lab_pos);
     tex.setFillColor(color);
 
@@ -52,12 +58,8 @@ Axis::Axis(double max, double length, double width, int nDiv, sf::Color color,
 
 Axis::Axis() {}
 
-double Axis::getOffSetX(std::string s, double f) {
-  return s.length() * f * 0.25;
-}
-
-double Axis::getOffSetY(std::string s, double f) {
-  return s.length() * f * 0.5;
+double Axis::get_lab_offset(std::string s, double f) {
+  return s.length() * f * ARIAL_RATIO;
 }
 
 void Axis::draw(sf::RenderWindow &window) {
