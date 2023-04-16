@@ -1,8 +1,8 @@
 #include "utilities.hpp"
 
-void ut::configuration(Pandemic &p1, Pandemic &p2, bool &a_m, double &q_t,
+void ut::configuration(Pandemic &p1, PandemicCM &p2, bool &a_m, double &q_t,
                    double &q_g, int &q_m_n, int &v_1_t, int &v_2_t) {
-  std::ifstream file("setting.txt");
+  std::ifstream file("config.txt");
   std::string line;
   std::vector<double> val;
   while (std::getline(file, line)) {
@@ -24,7 +24,7 @@ void ut::configuration(Pandemic &p1, Pandemic &p2, bool &a_m, double &q_t,
 
   Pandemic c1(static_cast<int>(std::round(val[0])), val[1], val[2], val[3],
               val[4], val[5]);
-  PandemicCM c2(p1, val[12], val[13], val[14]);
+  PandemicCM c2(c1, val[12], val[13], val[14]);
 
   if (val[6] > 0)
     a_m = true;

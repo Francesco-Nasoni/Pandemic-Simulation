@@ -9,11 +9,10 @@ PandemicCM::PandemicCM(const Pandemic &p, double V_B_E, double V_Y_E,
                        double V_R_E)
     : Pandemic(p), vacc_B_effect{V_B_E}, vacc_Y_effect{V_Y_E}, vacc_R_effect{
                                                                    V_R_E} {
-  if (V_B_E < 0 || V_B_E > 1 || V_Y_E < 0 || V_Y_E > 1 || V_R_E < 0 ||
-      V_R_E > 1)
+  if (V_B_E < 0  || V_Y_E < 0 || V_R_E < 0 )
     throw std::runtime_error{
-        "Effects of the counter measuremust are moltiplicative factore, they "
-        "must be given in the range [0, 1]"};
+        "The effects of countermeasure are multiplicative factor," 
+        "they must be positive or zero"};
 }
 
 void PandemicCM::die_or_live(int index, PandemicCM &next) const {
@@ -109,7 +108,7 @@ PandemicCM PandemicCM::evolve() const {
 }
 
 PandemicCM PandemicCM::evolveCM() const {
-  if (Quar == 0) {
+  if (Quar == false) {
     return this->evolve();
   } else {
     std::default_random_engine gen{std::random_device{}()};
@@ -120,22 +119,24 @@ PandemicCM PandemicCM::evolveCM() const {
     PandemicCM next = *this;
     for (int i = 0; i < N; i = i + 10) {
       for (int j = 0; j < 2; j++) {
-        if (population[i + j].get_state() == State::Infected)
+        if (population[i + j].get_state() == State::Infected){
           for (int l = 0; l < 2; l++) {
             int index = uniform_1(gen) * 10 + uniform_2(gen);
             infect(i + j, index, next);
           }
+        }
       }
     }
 
     for (int i = 0; i < N; i = i + 10) {
       for (int j = 0; j < 10; j++) {
-        if (population[i + j].get_state() == State::Infected)
+        if (population[i + j].get_state() == State::Infected){
           for (int l = 0; l < 2; l++) {
             int index = i + uniform_3(gen);
             infect(i + j, index, next);
           }
-        die_or_live(i + j, next);
+          die_or_live(i + j, next);
+        }
       }
     }
     return next;
