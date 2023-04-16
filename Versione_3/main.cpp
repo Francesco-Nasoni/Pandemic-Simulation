@@ -42,10 +42,16 @@ int main() {
   Graph graph(window, 50., pop_size, 3);
   graph.set_color(sf::Color::Red, 2);
   graph.set_color(sf::Color::Green, 3);
+  graph.add_to_legend("Susceptibles", 1);
+  graph.add_to_legend("Infected", 2);
+  graph.add_to_legend("Dead", 3);
 
   Graph graph_CM(window_CM, 50., pop_size, 3);
   graph_CM.set_color(sf::Color::Red, 2);
   graph_CM.set_color(sf::Color::Green, 3);
+  graph_CM.add_to_legend("Susceptibles", 1);
+  graph_CM.add_to_legend("Infected", 2);
+  graph_CM.add_to_legend("Dead", 3);
 
   int day = 0;
   int day_CM = 0;

@@ -105,8 +105,8 @@ void ut::print(Pandemic const &s1, Pandemic const &s2, int d1, int d2,
             << SPACE(8) << "Day: " << SPACE(8) << d1 << SPACE(11) << ""
             << SPACE(8) << "Day: " << SPACE(8) << d2 << std::endl
             << SPACE(8) << "S: " << SPACE(8) << s1.get_susceptible()
-            << SPACE(11) << " "
-            << SPACE(8) << "S: " << SPACE(8) << s2.get_susceptible() << std::endl
+            << SPACE(11) << " " << SPACE(8) << "S: " << SPACE(8)
+            << s2.get_susceptible() << std::endl
             << SPACE(8) << "I: " << SPACE(8) << s1.get_infected() << SPACE(11)
             << " " << SPACE(8) << "I: " << s2.get_infected() << std::endl
             << SPACE(8) << "D: " << SPACE(8) << s1.get_dead() << SPACE(11)

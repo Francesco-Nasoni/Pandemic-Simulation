@@ -11,12 +11,20 @@
 #define TOP_MARGIN 10
 #define BOTTOM_MARGIN 35
 #define LEFT_MARGIN 10
+#define LEGEND_MARGIN 10
+#define LEGEND_INTL 5
+#define LEGEND_N_CHAR 11
+#define LEGEND_REC_L 16
 
 class Graph {
 private:
   sf::RenderWindow &window;
   std::vector<sf::VertexArray> point;
   std::vector<sf::Color> color;
+  std::vector<sf::Text> leg_label;
+  std::vector<sf::RectangleShape> leg_rec;
+  sf::RectangleShape leg_box;
+  sf::Font font;
   Axis x_axis;
   Axis y_axis;
 
@@ -36,6 +44,7 @@ public:
   void resize(double, double);
   void add_point(sf::Vector2f, int i);
   void set_color(sf::Color, int i);
+  void add_to_legend(std::string, int i);
   void draw();
 };
 

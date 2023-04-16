@@ -3,6 +3,10 @@
 Graph::Graph(sf::RenderWindow &m_window, double max_x, double max_y, int n)
     : window{m_window}, max_x{max_x}, max_y{max_y}, x_exst{1}, y_exst{1} {
 
+  if (!font.loadFromFile("arial.ttf")) {
+    throw std::runtime_error{"cannot load font, please download arial.ttf"};
+  }
+
   resize(max_x, max_y);
   for (int i = 0; i < n; i++) {
     sf::VertexArray a;
@@ -10,6 +14,10 @@ Graph::Graph(sf::RenderWindow &m_window, double max_x, double max_y, int n)
     point.push_back(a);
     point[i].setPrimitiveType(sf::LineStrip);
   }
+
+  leg_box.setFillColor(sf::Color::Transparent);
+  leg_box.setOutlineThickness(1);
+  leg_box.setOutlineColor(sf::Color::Black);
 }
 
 double Graph::get_max_x() const { return max_x; }
@@ -87,9 +95,56 @@ void Graph::add_point(sf::Vector2f n_point, int i) {
   point[i - 1][point[i - 1].getVertexCount() - 1].color = color[i - 1];
 }
 
+void Graph::add_to_legend(std::string str, int i) {
+
+  i = i - 1;
+
+  sf::Vector2f lab_pos;
+  lab_pos.x = window.getSize().x - LEGEND_MARGIN -
+              LEGEND_N_CHAR * FONT_SIZE * ARIAL_RATIO;
+  lab_pos.y = LEGEND_MARGIN + i * (FONT_SIZE + LEGEND_INTL);
+
+  sf::Vector2f rec_pos;
+  rec_pos.x = lab_pos.x - LABEL_OFFSET - LEGEND_REC_L;
+  rec_pos.y = lab_pos.y;
+
+  leg_rec.push_back(
+      sf::RectangleShape(sf::Vector2f(LEGEND_REC_L, LEGEND_REC_L)));
+  leg_rec[i].setPosition(rec_pos);
+  leg_rec[i].setFillColor(color[i]);
+
+  sf::Text tex;
+  if (str.size() > LEGEND_N_CHAR)
+    str = str.erase(LEGEND_N_CHAR);
+  tex.setString(str);
+  tex.setCharacterSize(FONT_SIZE);
+  tex.setPosition(lab_pos);
+  tex.setFillColor(sf::Color::Black);
+  leg_label.push_back(tex);
+
+  sf::Vector2f box_pos;
+  sf::Vector2f box_size;
+
+  box_pos.x = rec_pos.x - LEGEND_MARGIN / 2;
+  box_pos.y = LEGEND_MARGIN / 2;
+
+  box_size.x = LEGEND_MARGIN + LEGEND_N_CHAR * FONT_SIZE * ARIAL_RATIO;
+  box_size.y = LEGEND_MARGIN + leg_label.size() * FONT_SIZE +
+               (leg_label.size() - 1) * LEGEND_INTL;
+
+  leg_box.setPosition(box_pos);
+  leg_box.setSize(box_size);
+}
+
 void Graph::draw() {
   x_axis.draw(window);
   y_axis.draw(window);
   for (auto &v : point)
     window.draw(v);
+  for (long unsigned int i = 0; i < leg_label.size(); i++) {
+    leg_label[i].setFont(font);
+    window.draw(leg_label[i]);
+    window.draw(leg_rec[i]);
+  }
+  window.draw(leg_box);
 }
