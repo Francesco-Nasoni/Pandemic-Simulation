@@ -24,14 +24,14 @@
 #                  - V : attivazione prima modalità di vaccinazione
 #                  - B : attivazione della seconda modalità di vaccinazione.
 
-7. Modalità automatica= 0
+7. Modalità automatica= 1
 
 #   I valori di attivazione/disattivazione vengono interpretati come
-#   percentuale di infetti su vivi
+#   percentuale di infetti su vivi [ I/(I+S)]
 #   NOTA: settare a 0 per non farla attivare mai
 
-8.  Attivazione quarantena= 0
-9.  Disattivazione quarantena = 0
+8.  Attivazione quarantena= 0.35
+9.  Disattivazione quarantena = 0.15
 10. Numero massimo di quarantene = 4
 
 #   I valori di attivazione dei vaccini vengono interpretati come giorno
@@ -41,11 +41,11 @@
 #   Modalità 1 è la modalità in cui vengono vaccinati solo gli individui
 #   con socialità più alta della media
 
-11. Attivazione vaccinazione 1= 200
+11. Attivazione vaccinazione 1= 300
 
 #   Modalità 2 è la modalità in cui vegono vaccianti tutti gli individui
 
-12. Attivazione vaccinazione 2= 400
+12. Attivazione vaccinazione 2= 450
 
 #   I seguenti valori sono moltiplicativi dei parametri B,Y,R
 

@@ -11,8 +11,7 @@
 
 #include "pandemicCM.hpp"
 
-#define FIXED_FLOAT(x) std::fixed << std::setprecision(x)
-#define SPACE(x) std::left << std::setw(x)
+#define SPACE std::left << std::setw(8)
 
 struct Samples {
   Pandemic normal;
@@ -28,7 +27,7 @@ void add_point(Graph &graph, Pandemic const &p, int d);
 void proces_event(sf::RenderWindow &window, sf ::Event const &event,
                   PandemicCM &p, bool auto_mode);
 void write(std::ostream &os, Pandemic const &sample, int d);
-void print(Pandemic const &s1, Pandemic const &s2, int d1, int d2);
+void print(Pandemic const &s1, Pandemic const &s2, int d1, int d2, int q_c);
 } // namespace ut
 
 #endif

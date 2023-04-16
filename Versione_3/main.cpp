@@ -19,6 +19,7 @@ int main() {
   int vacc_1_trigger;
   int vacc_2_trigger;
   int quar_count = 0;
+  bool quar = false;
   Pandemic sample;
   PandemicCM sample_CM;
 
@@ -51,7 +52,7 @@ int main() {
 
   ut::write(file, sample, 0);
   ut::write(fileCM, sample, 0);
-  ut::print(sample, sample_CM, 0, 0);
+  ut::print(sample, sample_CM, 0, 0, 0);
 
   std::chrono::time_point<std::chrono::steady_clock> start;
   std::chrono::time_point<std::chrono::steady_clock> end;
@@ -76,13 +77,19 @@ int main() {
     }
     if (!sample_CM.is_ended()) {
       if (auto_mode) {
-        if (static_cast<double>(sample_CM.get_infected()) /
-                    (static_cast<double>(sample_CM.get_susceptible()) +
-                     static_cast<double>(sample_CM.get_infected())) >=
-                quar_trigger &&
-            quar_trigger != 0 && quar_count < quar_max_n) {
+        double ISI = static_cast<double>(sample_CM.get_infected()) /
+                     static_cast<double>(sample_CM.get_susceptible() +
+                                         sample_CM.get_infected());
+        if (!quar && ISI >= quar_trigger && quar_trigger != 0 &&
+            quar_count < quar_max_n) {
+          sample_CM.toggle_quar();
+          quar = true;
+          quar_count++;
+        } else if (quar && ISI <= quar_goal) {
+          quar = false;
           sample_CM.toggle_quar();
         }
+
         if (day_CM >= vacc_1_trigger && vacc_1_trigger != 0) {
           sample_CM.toggle_vacc_1();
         }
@@ -95,7 +102,7 @@ int main() {
       ut::write(fileCM, sample_CM, day_CM);
     }
 
-    ut::print(sample, sample_CM, day, day_CM);
+    ut::print(sample, sample_CM, day, day_CM, quar_count);
 
     ut::add_point(graph, sample, day);
     ut::add_point(graph_CM, sample_CM, day_CM);
