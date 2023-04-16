@@ -11,7 +11,7 @@
 
 #include "pandemicCM.hpp"
 
-#define SPACE std::left << std::setw(8)
+#define SPACE(x) std::left << std::setw(x)
 
 struct Samples {
   Pandemic normal;

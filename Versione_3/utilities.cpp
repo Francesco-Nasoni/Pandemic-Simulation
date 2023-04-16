@@ -91,7 +91,8 @@ void ut::write(std::ostream &os, Pandemic const &sample, int d) {
      << '\t' << sample.get_dead() << '\n';
 }
 
-void ut::print(Pandemic const &s1, Pandemic const &s2, int d1, int d2, int q_c) {
+void ut::print(Pandemic const &s1, Pandemic const &s2, int d1, int d2,
+               int q_c) {
   double ISI_1 = static_cast<double>(s1.get_infected()) /
                  static_cast<double>(s1.get_susceptible() + s1.get_infected());
   double ISI_2 = static_cast<double>(s2.get_infected()) /
@@ -99,17 +100,19 @@ void ut::print(Pandemic const &s1, Pandemic const &s2, int d1, int d2, int q_c) 
 
   constexpr auto clear = "\033[2J";
   std::cout << clear;
-  std::cout << std::fixed << std::setprecision(3) << SPACE << "Day: " << SPACE << d1
-            << SPACE << " " << SPACE << "Day: " << SPACE << d2
-            << std::endl
-            << SPACE << "S: " << SPACE << s1.get_susceptible() << SPACE
-            << " " << SPACE << "S: " << SPACE << s2.get_susceptible()
-            << std::endl
-            << SPACE << "I: " << SPACE << s1.get_infected() << SPACE
-            << " " << SPACE << "I: " << s2.get_infected() << std::endl
-            << SPACE << "D: " << SPACE << s1.get_dead() << SPACE << " "
-            << SPACE << "D: " << s2.get_dead() << std::endl
-            << SPACE << "I/S+I: " << SPACE << ISI_1 << SPACE << " "
-            << SPACE << "I/S+I: " << ISI_2 << std::endl
-            << SPACE << " "<< SPACE << " " << SPACE <<" "<< "quar_c: "<< q_c << std::endl;
+  std::cout << std::fixed << std::setprecision(3) << SPACE(11) << "Sim. w/o CM"
+            << SPACE(16) << "" << SPACE(11) << "Sim. w CM" << std::endl
+            << SPACE(8) << "Day: " << SPACE(8) << d1 << SPACE(11) << ""
+            << SPACE(8) << "Day: " << SPACE(8) << d2 << std::endl
+            << SPACE(8) << "S: " << SPACE(8) << s1.get_susceptible()
+            << SPACE(11) << " "
+            << SPACE(8) << "S: " << SPACE(8) << s2.get_susceptible() << std::endl
+            << SPACE(8) << "I: " << SPACE(8) << s1.get_infected() << SPACE(11)
+            << " " << SPACE(8) << "I: " << s2.get_infected() << std::endl
+            << SPACE(8) << "D: " << SPACE(8) << s1.get_dead() << SPACE(11)
+            << " " << SPACE(8) << "D: " << s2.get_dead() << std::endl
+            << SPACE(8) << "I/S+I: " << SPACE(8) << ISI_1 << SPACE(11) << " "
+            << SPACE(8) << "I/S+I: " << SPACE(8) << ISI_2 << std::endl
+            << SPACE(8) << " " << SPACE(8) << " " << SPACE(11) << " "
+            << SPACE(8) << "quar_c: " << SPACE(8) << q_c << std::endl;
 }
