@@ -3,7 +3,7 @@
 
 #include "graph.hpp"
 #include "pandemic.hpp"
-#include "utilities.hpp"
+#include "m_functions.hpp"
 
 #include <chrono>
 #include <iostream>
@@ -35,7 +35,7 @@ TEST_CASE("Performances of evolve") {
     Pandemic sample(10000, 0.05, 0.1, 0.007, 4, 0.5 / 100.);
     {
       Timer timer;
-      ut::print(sample, sample, 10, 10, 0);
+      mf::print(sample, sample, 10, 10, 0);
       std::cout << "\nTime for print is about ";
     }
   }
@@ -45,7 +45,7 @@ TEST_CASE("Performances of evolve") {
     std::ofstream file{"Data/Result.test.txt", std::ofstream::trunc};
     {
       Timer timer;
-      ut::write(file, sample, 0);
+      mf::write(file, sample, 0);
       std::cout << "\nTime for write on the file is about ";
     }
   }
@@ -77,13 +77,13 @@ TEST_CASE("Performances of evolve") {
     Graph graph(window, 50., 10000, 3);
     graph.set_color(sf::Color::Red, 2);
     graph.set_color(sf::Color::Green, 3);
-    ut::render(window, graph);
+    mf::render(window, graph);
 
     std::cout << "\nTime for update the graph in the begining is about ";
     {
       Timer timer;
-      ut::add_point(graph, sample, 0);
-      ut::render(window, graph);
+      mf::add_point(graph, sample, 0);
+      mf::render(window, graph);
     }
   }
 
@@ -99,15 +99,15 @@ TEST_CASE("Performances of evolve") {
     int i = 0;
     while (sample.get_infected() > 0) {
       sample = sample.evolve();
-      ut::add_point(graph, sample, i);
+      mf::add_point(graph, sample, i);
       i++;
     }
-    ut::render(window, graph);
+    mf::render(window, graph);
     std::cout << "\nTime for update the graph in the end is about ";
     {
       Timer timer;
-      ut::add_point(graph, sample, i);
-      ut::render(window, graph);
+      mf::add_point(graph, sample, i);
+      mf::render(window, graph);
     }
   }
   window.close();

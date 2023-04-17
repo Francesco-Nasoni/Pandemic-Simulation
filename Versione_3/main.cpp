@@ -7,10 +7,12 @@
 
 #include "graph.hpp"
 #include "pandemicCM.hpp"
-#include "utilities.hpp"
+#include "m_functions.hpp"
 
 int main() {
 
+  Pandemic sample;
+  PandemicCM sample_CM;
   int pop_size;
   bool auto_mode;
   double quar_trigger;
@@ -18,18 +20,22 @@ int main() {
   int quar_max_n;
   int vacc_1_trigger;
   int vacc_2_trigger;
-  int quar_count = 0;
-  bool quar = false;
-  Pandemic sample;
-  PandemicCM sample_CM;
-
-  ut::configuration(sample, sample_CM, pop_size, auto_mode, quar_trigger,
+  int day_CM;
+  int quar_count;
+  bool quar;
+  int day;
+  
+  mf::configuration(sample, sample_CM, pop_size, auto_mode, quar_trigger,
                     quar_goal, quar_max_n, vacc_1_trigger, vacc_2_trigger);
+  quar_count = 0;
+  quar = false;
+  day = 0;
+  day_CM = 0;
 
   std::ofstream file{"Data/Result.txt", std::ofstream::trunc};
   std::ofstream fileCM{"Data/ResultCM.txt", std::ofstream::trunc};
 
-  auto desktop = sf::VideoMode::getDesktopMode();
+  auto const desktop = sf::VideoMode::getDesktopMode();
   sf::RenderWindow window{
       sf::VideoMode(desktop.width / 2, desktop.height / 2 - 20),
       "Pandemic Similation", sf::Style::Close};
@@ -53,12 +59,9 @@ int main() {
   graph_CM.add_to_legend("Infected", 2);
   graph_CM.add_to_legend("Dead", 3);
 
-  int day = 0;
-  int day_CM = 0;
-
-  ut::write(file, sample, 0);
-  ut::write(fileCM, sample, 0);
-  ut::print(sample, sample_CM, 0, 0, 0);
+  mf::write(file, sample, 0);
+  mf::write(fileCM, sample, 0);
+  mf::print(sample, sample_CM, 0, 0, 0);
 
   std::chrono::time_point<std::chrono::steady_clock> start;
   std::chrono::time_point<std::chrono::steady_clock> end;
@@ -71,16 +74,17 @@ int main() {
 
     sf::Event event;
     while (window.pollEvent(event))
-      ut::proces_event(window, event, sample_CM, auto_mode);
+      mf::proces_event(window, event, sample_CM, auto_mode);
 
     while (window_CM.pollEvent(event))
-      ut::proces_event(window_CM, event, sample_CM, auto_mode);
+      mf::proces_event(window_CM, event, sample_CM, auto_mode);
 
     if (!sample.is_ended()) {
       day++;
       sample = sample.evolve();
-      ut::write(file, sample, day);
+      mf::write(file, sample, day);
     }
+
     if (!sample_CM.is_ended()) {
       if (auto_mode) {
         double ISI = static_cast<double>(sample_CM.get_infected()) /
@@ -105,16 +109,16 @@ int main() {
       }
       day_CM++;
       sample_CM = sample_CM.evolveCM();
-      ut::write(fileCM, sample_CM, day_CM);
+      mf::write(fileCM, sample_CM, day_CM);
     }
 
-    ut::print(sample, sample_CM, day, day_CM, quar_count);
+    mf::print(sample, sample_CM, day, day_CM, quar_count);
 
-    ut::add_point(graph, sample, day);
-    ut::add_point(graph_CM, sample_CM, day_CM);
+    mf::add_point(graph, sample, day);
+    mf::add_point(graph_CM, sample_CM, day_CM);
 
-    ut::render(window, graph);
-    ut::render(window_CM, graph_CM);
+    mf::render(window, graph);
+    mf::render(window_CM, graph_CM);
 
     int wait;
     end = std::chrono::steady_clock::now();

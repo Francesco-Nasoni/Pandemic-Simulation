@@ -1,5 +1,5 @@
-#ifndef UTILITIES_HPP
-#define UTILITIES_HPP
+#ifndef MAIN_FUNCTION_HPP
+#define MAIN_FUNCTION_HPP
 
 #include "graph.hpp"
 #include <chrono>
@@ -18,7 +18,7 @@ struct Samples {
   PandemicCM c_measure;
 };
 
-namespace ut {
+namespace mf {
 void configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
                    double &q_t, double &q_g, int &q_m_n, int &v_1_t,
                    int &v_2_t);

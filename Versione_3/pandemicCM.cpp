@@ -10,9 +10,8 @@ PandemicCM::PandemicCM(const Pandemic &p, double V_B_E, double V_Y_E,
     : Pandemic(p), vacc_B_effect{V_B_E}, vacc_Y_effect{V_Y_E}, vacc_R_effect{
                                                                    V_R_E} {
   if (V_B_E < 0 || V_Y_E < 0 || V_R_E < 0)
-    throw std::runtime_error{
-        "The effects of countermeasure are multiplicative factor,"
-        "they must be positive or zero"};
+    throw std::runtime_error{"The effects of countermeasure are multiplicative "
+                             "factor, they must be positive or zero"};
 }
 
 void PandemicCM::die_or_live(int index, PandemicCM &next) const {
@@ -44,9 +43,7 @@ void PandemicCM::die_or_live(int index, PandemicCM &next) const {
 }
 
 void PandemicCM::infect(int i_1, int i_2, PandemicCM &next) const {
-
   double b = B;
-
   if (vacc_2) {
     b = B * vacc_B_effect;
   } else if (vacc_1) {

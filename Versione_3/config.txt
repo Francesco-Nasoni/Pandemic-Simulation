@@ -1,9 +1,12 @@
 #   QUESTO È IL FILE DI CONFIGURAZIONE DELLA SIMULAZIONE
 #   L'ordine in cui vengono impostate le variabili è quello che conta
-#   Va usato la seguente sintassi:
+#   Va usato la seguente sintassi precisa:
 #       "testo_non_considerato"= 000
-#   NOTA:   Se il valore richiesto dal parametro deve essere intero il valore
-#           viene arrotondato 
+#   NOTA.1:    Se il valore richiesto dal parametro deve essere intero il valore
+#              viene arrotondato 
+#   NOTA.2:    La dimensione della popolazione deve essere un multiplo di 10, 
+#              il valore verrà approssimato al multiplo di dieci più piccolo  
+#              e vicino al valore dato 
 
 #   PARAMETRI DELLA POPOLAZIONE
 1.  Dimensione della popolazione= 10000
@@ -24,7 +27,7 @@
 #                  - V : attivazione prima modalità di vaccinazione
 #                  - B : attivazione della seconda modalità di vaccinazione.
 
-7. Modalità automatica= 1
+7. Modalità automatica= 0
 
 #   I valori di attivazione/disattivazione vengono interpretati come
 #   percentuale di infetti su vivi [ I/(I+S)]
