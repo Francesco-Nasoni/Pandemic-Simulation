@@ -7,12 +7,14 @@
 
 PandemicCM::PandemicCM(const Pandemic &p, double V_B_E, double V_Y_E,
                        double V_R_E)
-    : Pandemic(p), vacc_B_effect{V_B_E}, vacc_Y_effect{V_Y_E}, vacc_R_effect{
-                                                                   V_R_E} {
+    : Pandemic(p), quar{false}, vacc_1{false}, vacc_2{false},
+      vacc_B_effect{V_B_E}, vacc_Y_effect{V_Y_E}, vacc_R_effect{V_R_E} {
   if (V_B_E < 0 || V_Y_E < 0 || V_R_E < 0)
     throw std::runtime_error{"The effects of countermeasure are multiplicative "
                              "factor, they must be positive or zero"};
 }
+
+PandemicCM::PandemicCM() {}
 
 void PandemicCM::die_or_live(int index, PandemicCM &next) const {
   std::default_random_engine gen{std::random_device{}()};
@@ -63,7 +65,7 @@ void PandemicCM::infect(int i_1, int i_2, PandemicCM &next) const {
   }
 }
 
-void PandemicCM::toggle_quar() { Quar = !Quar; };
+void PandemicCM::toggle_quar() { quar = !quar; };
 
 void PandemicCM::toggle_vacc_1() {
   if (!vacc_1)
@@ -104,8 +106,10 @@ PandemicCM PandemicCM::evolve() const {
   return next;
 }
 
+bool PandemicCM::get_quar() { return quar; };
+
 PandemicCM PandemicCM::evolveCM() const {
-  if (Quar == false) {
+  if (quar == false) {
     return this->evolve();
   } else {
     std::default_random_engine gen{std::random_device{}()};

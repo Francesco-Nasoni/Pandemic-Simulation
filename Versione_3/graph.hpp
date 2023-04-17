@@ -7,7 +7,7 @@
 
 #define WIDTH 2
 #define N_DIV 5
-#define y_ax_y 10 // coordinata y del punto di origine dell'asse y
+#define Y_AX_Y 10 // coordinata y del punto di origine dell'asse y
 #define TOP_MARGIN 10
 #define BOTTOM_MARGIN 35
 #define LEFT_MARGIN 10

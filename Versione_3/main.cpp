@@ -6,8 +6,8 @@
 #include <thread>
 
 #include "graph.hpp"
-#include "pandemicCM.hpp"
 #include "m_functions.hpp"
+#include "pandemicCM.hpp"
 
 int main() {
 
@@ -22,13 +22,11 @@ int main() {
   int vacc_2_trigger;
   int day_CM;
   int quar_count;
-  bool quar;
   int day;
-  
+
   mf::configuration(sample, sample_CM, pop_size, auto_mode, quar_trigger,
                     quar_goal, quar_max_n, vacc_1_trigger, vacc_2_trigger);
   quar_count = 0;
-  quar = false;
   day = 0;
   day_CM = 0;
 
@@ -60,7 +58,7 @@ int main() {
   graph_CM.add_to_legend("Dead", 3);
 
   mf::write(file, sample, 0);
-  mf::write(fileCM, sample, 0);
+  mf::write(fileCM, sample_CM, 0);
   mf::print(sample, sample_CM, 0, 0, 0);
 
   std::chrono::time_point<std::chrono::steady_clock> start;
@@ -74,10 +72,10 @@ int main() {
 
     sf::Event event;
     while (window.pollEvent(event))
-      mf::proces_event(window, event, sample_CM, auto_mode);
+      mf::proces_event(window, event, sample_CM, auto_mode, quar_count);
 
     while (window_CM.pollEvent(event))
-      mf::proces_event(window_CM, event, sample_CM, auto_mode);
+      mf::proces_event(window_CM, event, sample_CM, auto_mode, quar_count);
 
     if (!sample.is_ended()) {
       day++;
@@ -90,13 +88,11 @@ int main() {
         double ISI = static_cast<double>(sample_CM.get_infected()) /
                      static_cast<double>(sample_CM.get_susceptible() +
                                          sample_CM.get_infected());
-        if (!quar && ISI >= quar_trigger && quar_trigger != 0 &&
+        if (!sample_CM.get_quar() && ISI >= quar_trigger && quar_trigger != 0 &&
             quar_count < quar_max_n) {
           sample_CM.toggle_quar();
-          quar = true;
           quar_count++;
-        } else if (quar && ISI <= quar_goal) {
-          quar = false;
+        } else if (sample_CM.get_quar() && ISI <= quar_goal) {
           sample_CM.toggle_quar();
         }
 

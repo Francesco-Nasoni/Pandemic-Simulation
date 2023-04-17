@@ -7,18 +7,18 @@
 class Pandemic {
 protected:
   std::vector<Person> population;
-  int N;    
+  double m_social;
+  int N;
   double B;
   double Y;
   double R;
   int S;
-  int I = 0;
-  int D = 0;
-  double m_social;
+  int I;
+  int D;
 
 public:
   Pandemic(int, double, double, double, double, double);
-  Pandemic(){};
+  Pandemic();
   int get_susceptible() const;
   int get_infected() const;
   int get_dead() const;

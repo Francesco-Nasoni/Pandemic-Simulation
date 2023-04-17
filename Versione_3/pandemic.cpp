@@ -5,7 +5,8 @@
 #include "pandemic.hpp"
 
 Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
-    : population(n, Person()), N{n}, B{b}, Y{y}, R{r}, m_social{social} {
+    : population(n, Person()), m_social{social}, N{n}, B{b}, Y{y}, R{r}, S{N},
+      I{0}, D{0} {
 
   if (B < 0 || B > 1 || Y < 0 || Y > 1 || R < 0 || R > 1)
     throw std::runtime_error{"B , Y, R must be given in the range [0, 1]"};
@@ -19,7 +20,6 @@ Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
     throw std::runtime_error{
         "Percentage of initial infected must be greater than 0"};
 
-  S = N;
   std::default_random_engine gen{std::random_device{}()};
   std::normal_distribution<double> dist_0(social, 2);
   std::uniform_real_distribution<double> dist_1(0, 1);
@@ -36,6 +36,8 @@ Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
     }
   }
 }
+
+Pandemic::Pandemic() {}
 
 int Pandemic::get_susceptible() const { return S; }
 

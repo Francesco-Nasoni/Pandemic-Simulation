@@ -41,7 +41,7 @@ void Graph::resize(double m_x, double m_y) {
 
   Axis x(m_x, x_exst, WIDTH, N_DIV, sf::Color::Black, l_margin, x_ax_y,
          Direction::x);
-  Axis y(m_y, WIDTH, y_exst, N_DIV, sf::Color::Black, l_margin, y_ax_y,
+  Axis y(m_y, WIDTH, y_exst, N_DIV, sf::Color::Black, l_margin, Y_AX_Y,
          Direction::y);
 
   x_axis = x;

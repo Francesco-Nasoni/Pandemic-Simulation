@@ -65,12 +65,15 @@ void mf::add_point(Graph &graph, Pandemic const &p, int d) {
 }
 
 void mf::proces_event(sf::RenderWindow &window, sf ::Event const &event,
-                      PandemicCM &p, bool auto_mode) {
+                      PandemicCM &p, bool auto_mode, int &q_c) {
   if (event.type == sf::Event::KeyPressed) {
     if (!auto_mode) {
       switch (event.key.code) {
       case sf::Keyboard::Q:
         p.toggle_quar();
+        if (p.get_quar()) {
+          q_c++;
+        }
         break;
       case sf::Keyboard::V:
         p.toggle_vacc_1();

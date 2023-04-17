@@ -2,8 +2,8 @@
 #include "doctest.h"
 
 #include "graph.hpp"
-#include "pandemic.hpp"
 #include "m_functions.hpp"
+#include "pandemic.hpp"
 
 #include <chrono>
 #include <iostream>

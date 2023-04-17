@@ -25,9 +25,9 @@ void configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
 void render(sf::RenderWindow &window, Graph &graph);
 void add_point(Graph &graph, Pandemic const &p, int d);
 void proces_event(sf::RenderWindow &window, sf ::Event const &event,
-                  PandemicCM &p, bool auto_mode);
+                  PandemicCM &p, bool auto_mode, int &q_c);
 void write(std::ostream &os, Pandemic const &sample, int d);
 void print(Pandemic const &s1, Pandemic const &s2, int d1, int d2, int q_c);
-} // namespace ut
+} // namespace mf
 
 #endif
