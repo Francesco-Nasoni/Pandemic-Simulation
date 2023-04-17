@@ -37,3 +37,7 @@ Data1
 Plot
 Pro2
 .vscode
+
+#unused bash
+simulation.sh
+test.sh
