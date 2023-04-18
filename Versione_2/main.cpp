@@ -19,6 +19,8 @@ int main() {
   double Musk_trigger = 0.2;
   double Quar_trigger = 0.13;
   int Vacc_trigger = 0;
+  
+  int* s= new int{10};
 
   std::ofstream file{"Data/Result.txt", std::ofstream::trunc};
   std::ofstream fileCM{"Data/ResultCM.txt", std::ofstream::trunc};
