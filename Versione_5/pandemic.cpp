@@ -7,12 +7,12 @@ Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
     : population(n, Person()), m_social{social}, N{n}, B{b}, Y{y}, R{r}, S{N},
       I{0}, D{0} {
 
+  if (N <= 0)
+    throw std::runtime_error{"N must be greater than 0"};
   if (B < 0 || B > 1 || Y < 0 || Y > 1 || R < 0 || R > 1)
     throw std::runtime_error{"B , Y, R must be given in the range [0, 1]"};
   if (B == 0 && Y == 0 && R == 0)
     throw std::runtime_error{"If B, Y and R are zeros nothing will happen"};
-  if (N <= 0)
-    throw std::runtime_error{"N must be greater than 0"};
   if (social < 1)
     throw std::runtime_error{"Sociality must be grater or equal to 1"};
   if (i <= 0)
@@ -28,8 +28,6 @@ Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
     while (v.get_social() < 1) {
       v.set_social(std::round(dist_0(gen)));
     }
-    while (v.get_social() < 1)
-      ;
 
     if (dist_1(gen) < i) {
       v.set_state(State::Infected);

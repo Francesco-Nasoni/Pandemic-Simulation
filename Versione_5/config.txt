@@ -6,7 +6,7 @@
 #              viene arrotondato 
 #   NOTA.2:    La dimensione della popolazione deve essere un multiplo di 10, 
 #              il valore verrà approssimato al multiplo di dieci più piccolo  
-#              e vicino al valore dato 
+#              e vicino al valore dato
 
 #   PARAMETRI DELLA POPOLAZIONE
 1.  Dimensione della popolazione= 10000
@@ -27,7 +27,7 @@
 #                  - V : attivazione prima modalità di vaccinazione
 #                  - B : attivazione della seconda modalità di vaccinazione.
 
-7. Modalità automatica= 0
+7. Modalità automatica= 1
 
 #   I valori di attivazione/disattivazione vengono interpretati come
 #   percentuale di infetti su vivi [ I/(I+S)]
@@ -35,7 +35,7 @@
 
 8.  Attivazione quarantena= 0.35
 9.  Disattivazione quarantena = 0.15
-10. Numero massimo di quarantene = 4
+10. Numero massimo di quarantene = 1
 
 #   I valori di attivazione dei vaccini vengono interpretati come giorno
 #   in cui attivare la vaccinazione

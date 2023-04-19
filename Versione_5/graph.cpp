@@ -1,6 +1,7 @@
 #include "graph.hpp"
 
-Graph::Graph(sf::RenderWindow &m_window, double max_x, double max_y, std::vector<sf::Color> col, std::vector<std::string> tit)
+Graph::Graph(sf::RenderWindow &m_window, double max_x, double max_y,
+             std::vector<sf::Color> col, std::vector<std::string> tit)
     : window{m_window}, max_x{max_x}, max_y{max_y}, x_exst{1}, y_exst{1} {
 
   if (!font.loadFromFile("arial.ttf")) {
@@ -8,7 +9,7 @@ Graph::Graph(sf::RenderWindow &m_window, double max_x, double max_y, std::vector
   }
 
   resize(max_x, max_y);
-  for (long unsigned int i = 0; i < col.size() ; i++) {
+  for (long unsigned int i = 0; i < col.size(); i++) {
     sf::VertexArray a;
     color.push_back(col[i]);
     point.push_back(a);

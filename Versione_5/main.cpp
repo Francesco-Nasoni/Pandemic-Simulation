@@ -45,7 +45,7 @@ int main() {
 
   std::vector<std::string> leg_titles{"Susceptible", "Infected", "Dead"};
   std::vector<sf::Color> colors{sf::Color::Blue, sf::Color::Red,
-                                   sf::Color::Green};
+                                sf::Color::Green};
 
   Graph graph(window, 50., pop_size, colors, leg_titles);
   Graph graph_CM(window_CM, 50., pop_size, colors, leg_titles);

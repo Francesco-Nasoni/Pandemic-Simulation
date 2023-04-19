@@ -22,14 +22,14 @@ void mf::configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
     }
   }
   if (val.size() != 15)
-    throw std::runtime_error{
-        "Invalid nuber of senttings in config.txt, please fix it"};
+    throw std::runtime_error{"Invalid nuber of senttings in config.txt, they "
+                             "should be 15, please fix it"};
 
-  int num = static_cast<int>(std::round(val[0]));
-  int r_num = num % 10;
-  num = num - r_num;
-  p_s = num;
-  Pandemic c1(num, val[1], val[2], val[3], val[4], val[5]);
+  int p_s_t = static_cast<int>(std::round(val[0]));
+  int r_num = p_s_t % 10;
+  p_s_t = p_s_t - r_num;
+  p_s = p_s_t;
+  Pandemic c1(p_s_t, val[1], val[2], val[3], val[4], val[5]);
   PandemicCM c2(c1, val[12], val[13], val[14]);
 
   if (val[6] > 0)

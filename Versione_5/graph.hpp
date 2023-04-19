@@ -39,7 +39,8 @@ private:
   void set_RL_margin(double m_x, double m_y);
 
 public:
-  Graph(sf::RenderWindow &, double max_x, double max_y, std::vector<sf::Color> col, std::vector<std::string> tit);
+  Graph(sf::RenderWindow &, double max_x, double max_y,
+        std::vector<sf::Color> col, std::vector<std::string> tit);
   double get_max_x() const;
   double get_max_y() const;
   void resize(double, double);
