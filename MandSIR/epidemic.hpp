@@ -1,5 +1,5 @@
-#ifndef PANDEMIC_HPP
-#define PANDEMIC_HPP
+#ifndef EPIDEMIC_HPP
+#define EPIDEMIC_HPP
 
 #include <iostream>
 #include <stdexcept>
@@ -10,7 +10,7 @@ struct Population {
   double R;
 };
 
-class Pandemic {
+class Epidemic {
 private:
   double B;
   double Y;
@@ -18,10 +18,10 @@ private:
   Population p;
 
 public:
-  Pandemic(double, double, double, double);
+  Epidemic (double, double, double, double);
   Population round() const;
-  void roundPrint(unsigned int) const;
-  bool isEnded() const;
+  void round_print(unsigned int) const;
+  bool is_ended() const;
   void evolve();
 };
 

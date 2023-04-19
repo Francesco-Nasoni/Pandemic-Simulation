@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(epidemic CXX)
+project(pandemic CXX)
 
 include(CTest)
 
@@ -14,14 +14,14 @@ string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " -fsanitize=address -fno-omit-frame-
 
 find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 
-add_executable(epidemic main.cpp pandemic.cpp  pandemicCM.cpp axis.cpp graph.cpp person.cpp m_functions.cpp)
-target_link_libraries(epidemic PRIVATE sfml-graphics)
+add_executable(pandemic main.cpp pandemic.cpp  pandemicCM.cpp axis.cpp graph.cpp person.cpp m_functions.cpp)
+target_link_libraries(pandemic PRIVATE sfml-graphics)
 
 if (BUILD_TESTING)
   string(REGEX REPLACE  " " "-O2" CMAKE_EXE_LINKER_FLAGS_DEBUG "")
   string(REGEX REPLACE  " " "-O2" CMAKE_CXX_FLAGS_DEBUG "")
-  add_executable(epidemic.t pandemic.test.cpp pandemic.cpp  pandemicCM.cpp axis.cpp graph.cpp person.cpp m_functions.cpp)
-  target_link_libraries(epidemic.t PRIVATE sfml-graphics)
-  add_test(NAME epidemic.t COMMAND epidemic.t)
+  add_executable(pandemic.t pandemic.test.cpp pandemic.cpp  pandemicCM.cpp axis.cpp graph.cpp person.cpp m_functions.cpp)
+  target_link_libraries(pandemic.t PRIVATE sfml-graphics)
+  add_test(NAME pandemic.t COMMAND pandemic.t)
 
 endif()

@@ -1,9 +1,9 @@
-#include "pandemic.hpp"
+#include "epidemic.hpp"
 #include <cmath>
 #include <iostream>
 
-Pandemic::Pandemic(double B_, double Y_, double S_, double I_)
-    : B{B_}, Y{Y_}, N{S_ + I_}, p{S_, I_, 0} {
+Epidemic::Epidemic(double b, double y, double s, double i)
+    : B{b}, Y{y}, N{s + i}, p{s, i, 0} {
   if (N == 0 && Y == 0 && B == 0)
     throw std::runtime_error{"Can't perform simulation with all zeros"};
   if (Y == 0 && B == 0)
@@ -14,7 +14,7 @@ Pandemic::Pandemic(double B_, double Y_, double S_, double I_)
     throw std::runtime_error{"B<0 and Y<0 is nonsensical"};
 }
 
-Population Pandemic::round() const {
+Population Epidemic::round() const {
   Population p1 = p;
 
   if (std::round(p1.S) + std::round(p1.I) + std::round(p1.R) > N) {
@@ -46,7 +46,7 @@ Population Pandemic::round() const {
   return p1;
 }
 
-bool Pandemic::isEnded() const {
+bool Epidemic::is_ended() const {
   if (round().I == 0)
     return true;
   else if (Y == 0 && round().S == 0)
@@ -55,13 +55,13 @@ bool Pandemic::isEnded() const {
     return false;
 }
 
-void Pandemic::roundPrint(unsigned int d) const {
+void Epidemic::round_print(unsigned int d) const {
   Population p1;
   p1 = round();
   std::cout << d << '\t' << p1.S << '\t' << p1.I << '\t' << p1.R << std::endl;
 }
 
-void Pandemic::evolve() {
+void Epidemic::evolve() {
   double x = 0;
   x = p.S;
   p.S = x * (1 - (B / N) * p.I);

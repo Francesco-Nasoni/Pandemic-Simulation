@@ -14,9 +14,9 @@ string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " -fsanitize=address -fno-omit-frame-
 
 find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 
-add_executable(SIR main.cpp pandemic.cpp)
+add_executable(SIR main.cpp epidemic.cpp)
 
 if (BUILD_TESTING)
-  add_executable(SIR.t pandemic.test.cpp pandemic.cpp)
+  add_executable(SIR.t epidemic.test.cpp epidemic.cpp)
   add_test(NAME SIR.t COMMAND SIR.t)
 endif()

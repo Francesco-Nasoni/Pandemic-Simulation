@@ -4,6 +4,10 @@ void mf::configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
                        double &q_t, double &q_g, int &q_m_n, int &v_1_t,
                        int &v_2_t) {
   std::ifstream file("config.txt");
+  if(!file)
+  {
+    throw std::runtime_error{"Impossible to open the file confing.txt"};
+  }
   std::string line;
   std::vector<double> val;
   while (std::getline(file, line)) {
@@ -14,16 +18,18 @@ void mf::configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
         pos != std::string::npos) {
       row = line.substr(pos + 2);
 
-      if (row.find_first_not_of("1234567890.") != std::string::npos)
+      if (row.find_first_not_of("1234567890.") != std::string::npos){
         throw std::runtime_error{
             "Invalid variables in config.txt, please fix it"};
+      }
 
       val.push_back(stod(row));
     }
   }
-  if (val.size() != 15)
+  if (val.size() != 15){
     throw std::runtime_error{"Invalid nuber of senttings in config.txt, they "
                              "should be 15, please fix it"};
+  }
 
   int p_s_t = static_cast<int>(std::round(val[0]));
   int r_num = p_s_t % 10;
