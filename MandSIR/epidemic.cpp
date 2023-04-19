@@ -8,7 +8,7 @@ Epidemic::Epidemic(double b, double y, double s, double i)
     throw std::runtime_error{"Can't perform simulation with all zeros"};
   if (Y == 0 && B == 0)
     throw std::runtime_error{"With B=0 and Y=0 nothing will happen"};
-  if (S_ < 0 || I_ < 0)
+  if (s < 0 || i < 0)
     throw std::runtime_error{"S<0 or I<0 is nonsensical"};
   if (B < 0 || Y < 0)
     throw std::runtime_error{"B<0 and Y<0 is nonsensical"};

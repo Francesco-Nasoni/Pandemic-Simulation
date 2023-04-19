@@ -26,8 +26,7 @@ int main(int n_arg, char** arg) {
             << "Rimossi" << '\n';
   sample.round_print(0);
 
-
-  unsigned int i = 1;
+  int i = 1;
   while (!sample.is_ended()) {
     sample.evolve();
     sample.round_print(i);
