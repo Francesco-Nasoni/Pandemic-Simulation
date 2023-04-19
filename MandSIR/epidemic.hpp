@@ -18,7 +18,7 @@ private:
   Population p;
 
 public:
-  Epidemic (double, double, double, double);
+  Epidemic(double, double, double, double);
   Population round() const;
   void round_print(unsigned int) const;
   bool is_ended() const;

@@ -20,8 +20,8 @@ double PandemicCM::eval_B(int i_1, int i_2) const {
   if (vacc_2) {
     return B * vacc_B_effect;
   } else if (vacc_1) {
-    if (population[i_1].get_social() > m_social * 1.34 ||
-        population[i_2].get_social() > m_social * 1.34) {
+    if (population[i_1].get_social() > m_social * in_a_sigma ||
+        population[i_2].get_social() > m_social * in_a_sigma) {
       return B * vacc_B_effect;
     }
   }
@@ -32,7 +32,7 @@ double PandemicCM::eval_Y(int index) const {
   if (vacc_2) {
     return Y * vacc_Y_effect;
   } else if (vacc_1) {
-    if (population[index].get_social() > m_social * 1.34) {
+    if (population[index].get_social() > m_social * in_a_sigma) {
       return Y * vacc_Y_effect;
     }
   }
@@ -109,11 +109,11 @@ PandemicCM PandemicCM::evolveCM() const {
     std::uniform_int_distribution<int> uniform_3(0, 9);
 
     PandemicCM next = *this;
-    for (int i = 0; i < N; i = i + 10) {
-      for (int j = 0; j < 2; j++) {
+    for (int i = 0; i < N; i = i + family_size) {
+      for (int j = 0; j < n_worker; j++) {
         if (population[i + j].get_state() == State::Infected) {
-          for (int l = 0; l < 2; l++) {
-            int r_index = uniform_1(gen) * 10 + uniform_2(gen);
+          for (int l = 0; l < n_worker; l++) {
+            int r_index = uniform_1(gen) * family_size + uniform_2(gen);
             if (population[r_index].get_state() == State::Susceptible &&
                 next.population[r_index].get_state() == State::Susceptible &&
                 uniform_0(gen) < eval_B(i + j, r_index)) {
@@ -124,10 +124,10 @@ PandemicCM PandemicCM::evolveCM() const {
       }
     }
 
-    for (int i = 0; i < N; i = i + 10) {
-      for (int j = 0; j < 10; j++) {
+    for (int i = 0; i < N; i = i + family_size) {
+      for (int j = 0; j < family_size; j++) {
         if (population[i + j].get_state() == State::Infected) {
-          for (int l = 0; l < 2; l++) {
+          for (int l = 0; l < n_worker; l++) {
             int r_index = i + uniform_3(gen);
             if (population[r_index].get_state() == State::Susceptible &&
                 next.population[r_index].get_state() == State::Susceptible &&
