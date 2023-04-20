@@ -3,15 +3,19 @@
 #include <stdexcept>
 #include <vector>
 
-int main(int n_arg, char **arg) {
+int main(int argc, char **argv) {
 
-  if (n_arg != 5)
-    throw std::runtime_error("Invalid number of parameters");
-
+  try {
+    if (argc != 5)
+      throw std::runtime_error("Invalid number of parameters");
+  } catch (std::runtime_error &e) {
+    std::cerr << e.what() << '\n';
+    exit(0);
+  }
   std::vector<double> var;
 
-  for (int i = 1; i < n_arg; i++) {
-    std::string row(arg[i]);
+  for (int i = 1; i < argc; i++) {
+    std::string row(argv[i]);
     if (row.find_first_not_of("1234567890.") != std::string::npos) {
       throw std::runtime_error{"Invalid variables"};
     }
@@ -25,10 +29,8 @@ int main(int n_arg, char **arg) {
             << "Rimossi" << '\n';
   sample.round_print(0);
 
-  int i = 1;
-  while (!sample.is_ended()) {
+  for (int i = 0; !sample.is_ended(); i++) {
     sample.evolve();
     sample.round_print(i);
-    i++;
   }
 }
