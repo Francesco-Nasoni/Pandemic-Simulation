@@ -16,7 +16,7 @@
 
 namespace mf {
 void read_from_config(Pandemic &sample, PandemicCM &sample_CM, int &pop_size,
-                      bool &auto_mode, double &quar_goal, double &quar_trigger,
+                      bool &auto_mode, double &quar_trigger, double &quar_goal,
                       int &quar_max_n, int &vacc_1_trigger,
                       int &vacc_2_trigger);
 void render(sf::RenderWindow &window, Graph &graph);

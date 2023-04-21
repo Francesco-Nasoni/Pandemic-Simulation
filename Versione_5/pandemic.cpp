@@ -22,18 +22,19 @@ Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
         "Percentage of initial infected must be greater than 0"};
 
   population=std::vector<Person>(n, Person());
+  gen();
 
-  std::default_random_engine gen{std::random_device{}()};
-  std::normal_distribution<double> dist_0(social, 2);
-  std::uniform_real_distribution<double> dist_1(0, 1);
+  //std::default_random_engine gen{std::random_device{}()};
+  std::normal_distribution<double> normal(social, 2);
+  std::uniform_real_distribution<double> uniform(0, 1);
 
   for (auto &v : population) {
-    v.set_social(std::round(dist_0(gen)));
+    v.set_social(std::round(normal(gen())));
     while (v.get_social() < 1) {
-      v.set_social(std::round(dist_0(gen)));
+      v.set_social(std::round(normal(gen())));
     }
 
-    if (dist_1(gen) < i) {
+    if (uniform(gen()) < i) {
       v.set_state(State::Infected);
       S--;
       I++;
@@ -42,6 +43,12 @@ Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
 }
 
 Pandemic::Pandemic() {}
+
+std::default_random_engine& Pandemic::gen(){
+    static std::random_device rd;
+    static std::default_random_engine gen{rd()};
+    return gen;
+  }
 
 int Pandemic::get_susceptible() const { return S; }
 
@@ -68,14 +75,14 @@ void Pandemic::infect(int index, Pandemic &next) const {
 
 void Pandemic::die_or_heal(int index, Pandemic &next, double y,
                            double r) const {
-  std::default_random_engine gen{std::random_device{}()};
+  //std::default_random_engine gen{std::random_device{}()};
   std::uniform_real_distribution<double> uniform(0, 1);
 
-  if (uniform(gen) < y) {
+  if (uniform(gen()) < y) {
     next.population[index].set_state(State::Susceptible);
     next.S++;
     next.I--;
-  } else if (uniform(gen) < r) {
+  } else if (uniform(gen()) < r) {
     next.population[index].set_state(State::Dead);
     next.I--;
     next.D++;
@@ -83,7 +90,7 @@ void Pandemic::die_or_heal(int index, Pandemic &next, double y,
 }
 
 Pandemic Pandemic::evolve() {
-  std::default_random_engine gen{std::random_device{}()};
+  //std::default_random_engine gen{std::random_device{}()};
   std::uniform_int_distribution<int> uniform_1(0, N - 1);
   std::uniform_real_distribution<double> uniform(0, 1);
 
@@ -103,10 +110,10 @@ Pandemic Pandemic::evolve() {
     int index = std::distance(population.begin(), current_it);
 
     for (int j = 0; j < current_it->get_social(); j++) {
-      int r_index = uniform_1(gen);
+      int r_index = uniform_1(gen());
       if (population[r_index].get_state() == State::Susceptible &&
           next.population[r_index].get_state() == State::Susceptible &&
-          uniform(gen) < B) {
+          uniform(gen()) < B) {
         infect(r_index, next);
       }
     }

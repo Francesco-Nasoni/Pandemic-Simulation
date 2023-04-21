@@ -16,6 +16,8 @@ protected:
   int S;
   int I;
   int D;
+  
+  static std::default_random_engine& gen();
 
 public:
   Pandemic(int, double, double, double, double, double);
