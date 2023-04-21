@@ -10,6 +10,7 @@
 #include <iostream>
 
 struct Timer {
+
   std::chrono::time_point<std::chrono::steady_clock> start;
   std::chrono::time_point<std::chrono::steady_clock> end;
   std::chrono::duration<double, std::milli> duration;

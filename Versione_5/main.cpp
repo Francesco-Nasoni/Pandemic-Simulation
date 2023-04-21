@@ -20,15 +20,10 @@ int main() {
   int quar_max_n;
   int vacc_1_trigger;
   int vacc_2_trigger;
-  int day_CM;
   int quar_count;
-  int day;
 
   mf::configuration(sample, sample_CM, pop_size, auto_mode, quar_trigger,
                     quar_goal, quar_max_n, vacc_1_trigger, vacc_2_trigger);
-  quar_count = 0;
-  day = 0;
-  day_CM = 0;
 
   std::ofstream file{"Data/Result.txt", std::ofstream::trunc};
   std::ofstream fileCM{"Data/ResultCM.txt", std::ofstream::trunc};
@@ -58,8 +53,9 @@ int main() {
   std::chrono::time_point<std::chrono::steady_clock> end;
   std::chrono::duration<double, std::milli> duration;
 
-  while (window.isOpen() || window_CM.isOpen() || !sample.is_ended() ||
-         !sample_CM.is_ended()) {
+  for (int day = 0, day_CM = 0, quar_count = 0;
+       window.isOpen() || window_CM.isOpen() || !sample.is_ended() ||
+       !sample_CM.is_ended();) {
 
     start = std::chrono::steady_clock::now();
 
