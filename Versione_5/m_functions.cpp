@@ -1,15 +1,16 @@
 #include "m_functions.hpp"
 
-void mf::configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
-                       double &q_t, double &q_g, int &q_m_n, int &v_1_t,
-                       int &v_2_t) {
+void mf::read_from_config(Pandemic &sample, PandemicCM &sample_CM,
+                          int &pop_size, bool &auto_mode, double &quar_goal,
+                          double &quar_trigger, int &quar_max_n,
+                          int &vacc_1_trigger, int &vacc_2_trigger) {
   std::ifstream file("config.txt");
   if (!file) {
-    throw std::runtime_error{"Impossible to open the file confing.txt"};
+    throw std::runtime_error{"Impossible to open the file config.txt"};
   }
   std::string line;
-  std::vector<double> val;
-  while (std::getline(file, line)) {
+  std::vector<double> passed_parameters;
+  for (int n_line = 1; std::getline(file, line); n_line++) {
     std::string row;
     std::size_t pos = line.find_last_of('=');
     if ((line.find_first_of('#') != line.find_first_not_of("\t ") ||
@@ -17,39 +18,44 @@ void mf::configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
         pos != std::string::npos) {
       row = line.substr(pos + 2);
 
-      if (row.find_first_not_of("1234567890.") != std::string::npos) {
-        throw std::runtime_error{
-            "Invalid variables in config.txt, please fix it"};
+      if (row.find_first_not_of("-1234567890.") != std::string::npos ||
+          (row.find_last_of("-") != 0 &&
+           row.find_last_of("-") != std::string::npos)) {
+        throw std::runtime_error{"Invalid alphanumeric variables in line " +
+                                 std::to_string(n_line) +
+                                 " of config.txt, please fix it"};
       }
 
-      val.push_back(stod(row));
+      passed_parameters.push_back(stod(row));
     }
   }
-  if (val.size() != 15) {
+  if (passed_parameters.size() != 15) {
     throw std::runtime_error{"Invalid nuber of senttings in config.txt, they "
                              "should be 15, please fix it"};
   }
+  
+  int pop_size_input = static_cast<int>(std::round(passed_parameters[0]));
+  int remainder = pop_size_input % 10;
+  pop_size = pop_size_input - remainder;
 
-  int p_s_t = static_cast<int>(std::round(val[0]));
-  int r_num = p_s_t % 10;
-  p_s_t = p_s_t - r_num;
-  p_s = p_s_t;
-  Pandemic c1(p_s_t, val[1], val[2], val[3], val[4], val[5]);
-  PandemicCM c2(c1, val[12], val[13], val[14]);
+  Pandemic p(pop_size, passed_parameters[1], passed_parameters[2],
+             passed_parameters[3], passed_parameters[4], passed_parameters[5]);
+  PandemicCM p_CM(p, passed_parameters[12], passed_parameters[13],
+                  passed_parameters[14]);
 
-  if (val[6] > 0)
-    a_m = true;
+  if (passed_parameters[6] > 0)
+    auto_mode = true;
   else
-    a_m = false;
+    auto_mode = false;
 
-  q_t = val[7];
-  q_g = val[8];
-  q_m_n = static_cast<int>(std::round(val[9]));
-  v_1_t = static_cast<int>(std::round(val[10]));
-  v_2_t = static_cast<int>(std::round(val[11]));
+  quar_trigger = passed_parameters[7];
+  quar_goal = passed_parameters[8];
+  quar_max_n = static_cast<int>(std::round(passed_parameters[9]));
+  vacc_1_trigger = static_cast<int>(std::round(passed_parameters[10]));
+  vacc_2_trigger = static_cast<int>(std::round(passed_parameters[11]));
 
-  p1 = c1;
-  p2 = c2;
+  sample = p;
+  sample_CM = p_CM;
 }
 
 void mf::render(sf::RenderWindow &window, Graph &graph) {
@@ -59,10 +65,10 @@ void mf::render(sf::RenderWindow &window, Graph &graph) {
 }
 
 void mf::add_point(Graph &graph, Pandemic const &p, int d) {
-  double m_x = graph.get_max_x();
-  double m_y = graph.get_max_y();
-  if (d > m_x) {
-    graph.resize(m_x + 50, m_y);
+  double max_x = graph.get_max_x();
+  double max_y = graph.get_max_y();
+  if (d > max_x) {
+    graph.resize(max_x + 50, max_y);
   }
   graph.add_point(sf::Vector2f(d, p.get_susceptible()), 1);
   graph.add_point(sf::Vector2f(d, p.get_infected()), 2);
@@ -70,14 +76,14 @@ void mf::add_point(Graph &graph, Pandemic const &p, int d) {
 }
 
 void mf::proces_event(sf::RenderWindow &window, sf ::Event const &event,
-                      PandemicCM &p, bool auto_mode, int &q_c) {
+                      PandemicCM &p, bool auto_mode, int &quar_count) {
   if (event.type == sf::Event::KeyPressed) {
     if (!auto_mode) {
       switch (event.key.code) {
       case sf::Keyboard::Q:
         p.toggle_quar();
         if (p.get_quar()) {
-          q_c++;
+          quar_count++;
         }
         break;
       case sf::Keyboard::V:

@@ -1,1 +1,1 @@
-g++ main.cpp pandemic.cpp -Wall -Wextra -O2
+g++ main.cpp epidemic.cpp -Wall -Wextra -O2

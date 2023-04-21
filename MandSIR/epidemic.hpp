@@ -21,7 +21,7 @@ public:
   Epidemic(double, double, double, double);
   Epidemic(){};
   Population round() const;
-  void round_print(unsigned int) const;
+  void round_print(int) const;
   bool is_ended() const;
   void evolve();
 };

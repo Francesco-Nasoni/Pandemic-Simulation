@@ -9,7 +9,7 @@
 #              e vicino al valore dato
 
 #   PARAMETRI DELLA POPOLAZIONE
-1.  Dimensione della popolazione= 10000
+1.  Dimensione della popolazione= -10000
 2.  Valore di B= 0.05
 3.  Valore di Y= 0.1
 4.  Valore di R= 0.007

@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <iostream>
 #include <random>
+#include <stdexcept>
 #include <thread>
 
 #include "pandemicCM.hpp"
@@ -14,9 +15,10 @@
 #define SPACE(x) std::left << std::setw(x)
 
 namespace mf {
-void configuration(Pandemic &p1, PandemicCM &p2, int &p_s, bool &a_m,
-                   double &q_t, double &q_g, int &q_m_n, int &v_1_t,
-                   int &v_2_t);
+void read_from_config(Pandemic &sample, PandemicCM &sample_CM, int &pop_size,
+                      bool &auto_mode, double &quar_goal, double &quar_trigger,
+                      int &quar_max_n, int &vacc_1_trigger,
+                      int &vacc_2_trigger);
 void render(sf::RenderWindow &window, Graph &graph);
 void add_point(Graph &graph, Pandemic const &p, int d);
 void proces_event(sf::RenderWindow &window, sf ::Event const &event,

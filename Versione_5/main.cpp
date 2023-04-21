@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <iostream>
 #include <random>
+#include <stdexcept>
 #include <thread>
 
 #include "graph.hpp"
@@ -22,8 +23,15 @@ int main() {
   int vacc_2_trigger;
   int quar_count;
 
-  mf::configuration(sample, sample_CM, pop_size, auto_mode, quar_trigger,
-                    quar_goal, quar_max_n, vacc_1_trigger, vacc_2_trigger);
+  try {
+    mf::read_from_config(sample, sample_CM, pop_size, auto_mode, quar_trigger,
+                         quar_goal, quar_max_n, vacc_1_trigger, vacc_2_trigger);
+  } catch (std::runtime_error &e) {
+    std::cerr << "ERROR: " << e.what() << '\n';
+    exit(0);
+  }
+
+  quar_count = 0;
 
   std::ofstream file{"Data/Result.txt", std::ofstream::trunc};
   std::ofstream fileCM{"Data/ResultCM.txt", std::ofstream::trunc};
@@ -53,10 +61,8 @@ int main() {
   std::chrono::time_point<std::chrono::steady_clock> end;
   std::chrono::duration<double, std::milli> duration;
 
-  for (int day = 0, day_CM = 0, quar_count = 0;
-       window.isOpen() || window_CM.isOpen() || !sample.is_ended() ||
-       !sample_CM.is_ended();) {
-
+  for (int day = 0, day_CM = 0; window.isOpen() || window_CM.isOpen() ||
+                                !sample.is_ended() || !sample_CM.is_ended();) {
     start = std::chrono::steady_clock::now();
 
     sf::Event event;
