@@ -24,7 +24,6 @@ Pandemic::Pandemic(int n, double b, double y, double r, double social, double i)
   population=std::vector<Person>(n, Person());
   gen();
 
-  //std::default_random_engine gen{std::random_device{}()};
   std::normal_distribution<double> normal(social, 2);
   std::uniform_real_distribution<double> uniform(0, 1);
 
@@ -75,7 +74,6 @@ void Pandemic::infect(int index, Pandemic &next) const {
 
 void Pandemic::die_or_heal(int index, Pandemic &next, double y,
                            double r) const {
-  //std::default_random_engine gen{std::random_device{}()};
   std::uniform_real_distribution<double> uniform(0, 1);
 
   if (uniform(gen()) < y) {
@@ -90,7 +88,6 @@ void Pandemic::die_or_heal(int index, Pandemic &next, double y,
 }
 
 Pandemic Pandemic::evolve() {
-  //std::default_random_engine gen{std::random_device{}()};
   std::uniform_int_distribution<int> uniform_1(0, N - 1);
   std::uniform_real_distribution<double> uniform(0, 1);
 

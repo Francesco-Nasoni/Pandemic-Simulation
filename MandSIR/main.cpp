@@ -15,7 +15,9 @@ int main(int argc, char **argv) {
 
     for (int i = 1; i < argc; i++) {
       std::string row(argv[i]);
-      if (row.find_first_not_of("-1234567890.") != std::string::npos || ( row.find_last_of("-") != 0 && row.find_last_of("-") != std::string::npos ) ) {
+      if (row.find_first_not_of("-1234567890.") != std::string::npos ||
+          (row.find_last_of("-") != 0 &&
+           row.find_last_of("-") != std::string::npos)) {
         throw std::runtime_error{"Invalid alphanumeric variables"};
       }
       passed_parameters.push_back(stod(row));
@@ -23,7 +25,7 @@ int main(int argc, char **argv) {
     sample = Epidemic(passed_parameters[0], passed_parameters[1],
                       passed_parameters[2], passed_parameters[3]);
   } catch (std::runtime_error &e) {
-    std::cerr << "ERROR: "<< e.what() << '\n';
+    std::cerr << "ERROR: " << e.what() << '\n';
     exit(0);
   }
 

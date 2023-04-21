@@ -125,7 +125,7 @@ TEST_CASE("Performances of pandemic") {
 
   SUBCASE("performance of evolve in the beginning") {
     Pandemic sample(10000, 0.05, 0.1, 0.007, 4, 0.5 / 100.);
-    std::cout << "\nTime for evolve in the beginningis is about ";
+    std::cout << "\nTime for evolve in the beginning is about ";
     {
       Timer timer;
       sample = sample.evolve();
@@ -134,7 +134,7 @@ TEST_CASE("Performances of pandemic") {
 
   SUBCASE("performance of evolve some where in the middle") {
     Pandemic sample(10000, 0.05, 0.1, 0.007, 4, 0.5 / 100.);
-    std::cout << "\nTime for evolve near the pick is about ";
+    std::cout << "\nTime for evolve near the peak is about ";
     for (int i = 0; i < 70; i++) {
       sample = sample.evolve();
     }
@@ -211,7 +211,7 @@ TEST_CASE("Performances of pandemicCM") {
       sampleCM = sampleCM.evolveCM();
     }
     sampleCM.toggle_vacc_2();
-    std::cout << "\nTime for evolveCM with vaccination near the pick is about ";
+    std::cout << "\nTime for evolveCM with vaccination near the peak is about ";
     {
       Timer timer;
       sampleCM = sampleCM.evolveCM();

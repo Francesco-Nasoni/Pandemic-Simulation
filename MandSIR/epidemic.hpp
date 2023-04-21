@@ -20,10 +20,10 @@ private:
 public:
   Epidemic(double, double, double, double);
   Epidemic(){};
-  Population round() const;
-  void round_print(int) const;
-  bool is_ended() const;
   void evolve();
+  Population round() const;
+  bool is_ended() const;
+  void round_print(int) const;
 };
 
 #endif

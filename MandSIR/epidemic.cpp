@@ -17,6 +17,14 @@ Epidemic::Epidemic(double s, double i, double b, double y)
                              "must be given in the range [0,1]"};
 }
 
+void Epidemic::evolve() {
+  double x = 0;
+  x = pop.S;
+  pop.S = x * (1 - (B / N) * pop.I);
+  pop.R = pop.R + pop.I * Y;
+  pop.I = pop.I * (1 + (B / N) * x - Y);
+}
+
 Population Epidemic::round() const {
   std::vector<double> pop_values{pop.S, pop.I, pop.R};
   std::vector<double> decimal_parts{pop.S - floor(pop.S), pop.I - floor(pop.I),
@@ -52,12 +60,4 @@ void Epidemic::round_print(int d) const {
   Population p1;
   p1 = round();
   std::cout << d << '\t' << p1.S << '\t' << p1.I << '\t' << p1.R << std::endl;
-}
-
-void Epidemic::evolve() {
-  double x = 0;
-  x = pop.S;
-  pop.S = x * (1 - (B / N) * pop.I);
-  pop.R = pop.R + pop.I * Y;
-  pop.I = pop.I * (1 + (B / N) * x - Y);
 }
