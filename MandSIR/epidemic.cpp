@@ -1,49 +1,42 @@
 #include "epidemic.hpp"
+#include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <vector>
 
-Epidemic::Epidemic(double b, double y, double s, double i)
-    : B{b}, Y{y}, N{s + i}, p{s, i, 0} {
+Epidemic::Epidemic(double s, double i, double b, double y)
+    : B{b}, Y{y}, N{s + i}, pop{s, i, 0} {
   if (N == 0 && Y == 0 && B == 0)
-    throw std::runtime_error{"Can't perform simulation with all zeros"};
+    throw std::runtime_error{"ERROR: Can't perform simulation with all zeros"};
   if (Y == 0 && B == 0)
-    throw std::runtime_error{"With B=0 and Y=0 nothing will happen"};
+    throw std::runtime_error{"ERROR: With B=0 and Y=0 nothing will happen"};
   if (s < 0 || i < 0)
-    throw std::runtime_error{"S<0 or I<0 is nonsensical"};
-  if (B < 0 || Y < 0)
-    throw std::runtime_error{"B<0 and Y<0 is nonsensical"};
+    throw std::runtime_error{"ERROR: S<0 or I<0 is nonsensical"};
+  if (B < 0 || B > 1 || Y < 0 || Y > 1)
+    throw std::runtime_error{"ERROR: B and Y are probabilities thus they "
+                             "must be given in the range [0,1]"};
 }
 
 Population Epidemic::round() const {
-  Population p1 = p;
+  std::vector<double> pop_values{pop.S, pop.I, pop.R};
+  std::vector<double> decimal_parts{pop.S - floor(pop.S), pop.I - floor(pop.I),
+                                    pop.R - floor(pop.R)};
 
-  if (std::round(p1.S) + std::round(p1.I) + std::round(p1.R) > N) {
-    if (p1.S < p1.I)
-      if (p1.S < p1.R)
-        p1.S = std::round(p1.S) - 1;
-      else
-        p1.R = std::round(p1.R) - 1;
-    else if (p1.I < p1.R)
-      p1.I = std::round(p1.I) - 1;
-    else
-      p1.R = std::round(p1.R) - 1;
-  } else if (std::round(p1.S) + std::round(p1.I) + std::round(p1.R) < N) {
-    if (p1.S > p1.I)
-      if (p1.S > p1.R)
-        p1.S = std::round(p1.S) + 1;
-      else
-        p1.R = std::round(p1.R) + 1;
-    else if (p1.I > p1.R)
-      p1.I = std::round(p1.I) + 1;
-    else
-      p1.R = std::round(p1.R) + 1;
+  if (std::round(pop.S) + std::round(pop.I) + std::round(pop.R) < N) {
+    auto max = std::max_element(decimal_parts.begin(), decimal_parts.end());
+    int index = std::distance(decimal_parts.begin(), max);
+    pop_values[index] = ceil(pop_values[index]);
+  } else if (std::round(pop.S) + std::round(pop.I) + std::round(pop.R) > N) {
+    auto min = std::min_element(decimal_parts.begin(), decimal_parts.end());
+    int index = std::distance(decimal_parts.begin(), min);
+    pop_values[index] = floor(pop_values[index]);
   }
 
-  p1.S = std::round(p1.S);
-  p1.I = std::round(p1.I);
-  p1.R = std::round(p1.R);
+  for (double &v : pop_values) {
+    v = std::round(v);
+  }
 
-  return p1;
+  return Population{pop_values[0], pop_values[1], pop_values[2]};
 }
 
 bool Epidemic::is_ended() const {
@@ -63,8 +56,8 @@ void Epidemic::round_print(unsigned int d) const {
 
 void Epidemic::evolve() {
   double x = 0;
-  x = p.S;
-  p.S = x * (1 - (B / N) * p.I);
-  p.R = p.R + p.I * Y;
-  p.I = p.I * (1 + (B / N) * x - Y);
+  x = pop.S;
+  pop.S = x * (1 - (B / N) * pop.I);
+  pop.R = pop.R + pop.I * Y;
+  pop.I = pop.I * (1 + (B / N) * x - Y);
 }

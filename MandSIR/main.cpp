@@ -5,28 +5,31 @@
 
 int main(int argc, char **argv) {
 
+  Epidemic sample;
   try {
-    if (argc != 5)
-      throw std::runtime_error("Invalid number of parameters");
+    if (argc != 5) {
+      throw std::runtime_error("ERROR: Invalid number of parameters");
+    }
+
+    std::vector<double> passed_parameters;
+
+    for (int i = 1; i < argc; i++) {
+      std::string row(argv[i]);
+      if (row.find_first_not_of("1234567890.") != std::string::npos) {
+        throw std::runtime_error{"ERROR: Invalid alphanumeric variables"};
+      }
+      passed_parameters.push_back(stod(row));
+    }
+    sample = Epidemic(passed_parameters[0], passed_parameters[1],
+                      passed_parameters[2], passed_parameters[3]);
   } catch (std::runtime_error &e) {
     std::cerr << e.what() << '\n';
     exit(0);
   }
-  std::vector<double> var;
-
-  for (int i = 1; i < argc; i++) {
-    std::string row(argv[i]);
-    if (row.find_first_not_of("1234567890.") != std::string::npos) {
-      throw std::runtime_error{"Invalid variables"};
-    }
-    var.push_back(stod(row));
-  }
-
-  Epidemic sample{var[2], var[3], var[0], var[1]};
 
   std::cout << std::endl
-            << "Giorno" << '\t' << "Sani" << '\t' << "Infetti" << '\t'
-            << "Rimossi" << '\n';
+            << "Day" << '\t' << "Susceptible" << '\t' << "Infected" << '\t'
+            << "Remuved" << '\n';
   sample.round_print(0);
 
   for (int i = 0; !sample.is_ended(); i++) {

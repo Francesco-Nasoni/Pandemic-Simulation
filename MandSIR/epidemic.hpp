@@ -15,10 +15,11 @@ private:
   double B;
   double Y;
   double N;
-  Population p;
+  Population pop;
 
 public:
   Epidemic(double, double, double, double);
+  Epidemic(){};
   Population round() const;
   void round_print(unsigned int) const;
   bool is_ended() const;
