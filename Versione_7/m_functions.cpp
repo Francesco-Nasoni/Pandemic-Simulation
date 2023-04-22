@@ -20,7 +20,7 @@ void mf::read_from_config(Pandemic &sample, PandemicCM &sample_CM,
 
       if (row.find_first_not_of("-1234567890.") != std::string::npos ||
           (row.find_last_of("-") != 0 &&
-           row.find_last_of("-") != std::string::npos)) {
+           row.find_last_of("-") != std::string::npos) || row=="-") {
         throw std::runtime_error{"Invalid alphanumeric variables in line " +
                                  std::to_string(n_line) +
                                  " of config.txt, please fix it"};

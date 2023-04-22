@@ -17,7 +17,8 @@ int main(int argc, char **argv) {
       std::string row(argv[i]);
       if (row.find_first_not_of("-1234567890.") != std::string::npos ||
           (row.find_last_of("-") != 0 &&
-           row.find_last_of("-") != std::string::npos)) {
+           row.find_last_of("-") != std::string::npos) ||
+          row == "-") {
         throw std::runtime_error{"Invalid alphanumeric variables"};
       }
       passed_parameters.push_back(stod(row));

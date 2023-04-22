@@ -64,8 +64,7 @@ void PandemicCM::toggle_vacc_2() {
 
 bool PandemicCM::get_quar() { return quar; };
 
-
-void PandemicCM::evolve(){
+void PandemicCM::evolve() {
 
   std::uniform_int_distribution<int> uniform_1(0, N - 1);
 
@@ -92,8 +91,7 @@ void PandemicCM::evolve(){
   }
 }
 
-
-void PandemicCM::evolveCM(){
+void PandemicCM::evolveCM() {
   if (quar == false) {
     evolve();
   } else {
