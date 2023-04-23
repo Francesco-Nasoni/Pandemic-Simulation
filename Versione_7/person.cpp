@@ -8,4 +8,4 @@ void Person::set_state(State s) { state = s; }
 
 void Person::set_social(int s) { sociality = s; }
 
-Person::Person() { state = State::Susceptible; }
+Person::Person() : state{State::Susceptible} {}
