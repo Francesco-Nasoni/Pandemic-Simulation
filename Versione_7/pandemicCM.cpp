@@ -104,7 +104,7 @@ void PandemicCM::evolveCM() {
     for (int i = 0; i < N; i = i + family_size) {
       for (int j = 0; j < n_worker; j++) {
         if (population[i + j].get_state() == State::Infected) {
-          for (int l = 0; l < n_worker; l++) {
+          for (int l = 0; l < n_interaction_quarantine; l++) {
             int r_index = uniform_1(gen()) * family_size + uniform_2(gen());
             infect(r_index, old_population, eval_B(i + j, r_index));
           }
@@ -115,7 +115,7 @@ void PandemicCM::evolveCM() {
     for (int i = 0; i < N; i = i + family_size) {
       for (int j = 0; j < family_size; j++) {
         if (population[i + j].get_state() == State::Infected) {
-          for (int l = 0; l < n_worker; l++) {
+          for (int l = 0; l < n_interaction_quarantine; l++) {
             int r_index = i + uniform_3(gen());
             infect(r_index, old_population, eval_B(i + j, r_index));
           }

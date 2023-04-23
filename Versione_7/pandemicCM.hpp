@@ -15,6 +15,7 @@ private:
   static constexpr double in_a_sigma = 1.34;
   static constexpr int n_worker = 2;
   static constexpr int family_size = 10;
+  static constexpr int n_interaction_quarantine = 2;
 
   double eval_B(int i_1, int i_2) const;
   double eval_Y(int index) const;
