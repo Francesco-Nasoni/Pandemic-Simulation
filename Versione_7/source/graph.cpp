@@ -69,7 +69,7 @@ void Graph::resize(double new_max_x, double new_max_y) {
       double old_rel_y = v[i].position.y -
                          static_cast<double>(window.getSize().y) +
                          c_margin_bottom;
-                         
+
       // Reassign both x and y coordinates by multiplying the old relative
       // positions times the raltive ratio and by adding the new margin values
       v[i].position.x = old_rel_x * rel_ratio_x + l_margin;

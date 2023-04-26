@@ -5,6 +5,11 @@ void mf::read_from_config(Pandemic &sample, PandemicCM &sample_CM,
                           double &quar_goal, int &quar_max_n,
                           int &vacc_1_trigger, int &vacc_2_trigger) {
   std::ifstream file("config.txt");
+
+  std::ifstream font("arial.ttf");
+  if (!font.is_open()) {
+    throw std::runtime_error{"cannot load font, please download arial.ttf"};
+  }
   if (!file) {
     throw std::runtime_error{"Impossible to open the file config.txt"};
   }
@@ -37,8 +42,8 @@ void mf::read_from_config(Pandemic &sample, PandemicCM &sample_CM,
 
   int pop_size_input = static_cast<int>(std::round(passed_parameters[0]));
   int remainder = pop_size_input % 10;
-  pop_size = pop_size_input - remainder;
 
+  pop_size = pop_size_input - remainder;
   Pandemic p(pop_size, passed_parameters[1], passed_parameters[2],
              passed_parameters[3], passed_parameters[4], passed_parameters[5]);
   PandemicCM p_CM(p, passed_parameters[12], passed_parameters[13],
