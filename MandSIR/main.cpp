@@ -1,6 +1,7 @@
 #include "epidemic.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <cmath>
 #include <vector>
 
 int main(int argc, char **argv) {
@@ -23,7 +24,7 @@ int main(int argc, char **argv) {
       }
       passed_parameters.push_back(stod(row));
     }
-    sample = Epidemic(passed_parameters[0], passed_parameters[1],
+    sample = Epidemic(std::round(passed_parameters[0]), std::round(passed_parameters[1]),
                       passed_parameters[2], passed_parameters[3]);
   } catch (std::runtime_error &e) {
     std::cerr << "ERROR: " << e.what() << '\n';

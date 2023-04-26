@@ -26,6 +26,10 @@ int main() {
   try {
     mf::read_from_config(sample, sample_CM, pop_size, auto_mode, quar_trigger,
                          quar_goal, quar_max_n, vacc_1_trigger, vacc_2_trigger);
+    std::ifstream font("arial.ttf");
+    if(!font.is_open()){
+      throw std::runtime_error{"cannot load font, please download arial.ttf"};
+    }
   } catch (std::runtime_error &e) {
     std::cerr << "ERROR: " << e.what() << '\n';
     exit(0);

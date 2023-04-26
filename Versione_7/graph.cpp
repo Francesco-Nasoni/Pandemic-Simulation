@@ -4,14 +4,7 @@
 Graph::Graph(sf::RenderWindow &m_window, double max_x, double max_y,
              std::vector<sf::Color> colors, std::vector<std::string> titles)
     : window{m_window}, max_x{max_x}, max_y{max_y}, x_exst{1}, y_exst{1} {
-  try{
-    if (!font.loadFromFile("arial.ttf")) {
-      throw std::runtime_error{"cannot load font, please download arial.ttf"};
-    }
-  }catch(std::runtime_error &e){
-    std::cerr << "ERROR: " << e.what() << '\n';
-    exit(0);
-  }
+  font.loadFromFile("arial.ttf");
 
   resize(max_x, max_y);
   for (long unsigned int i = 0; i < colors.size(); i++) {
