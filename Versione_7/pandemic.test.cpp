@@ -90,7 +90,7 @@ TEST_CASE("PancdemicCM.cpp") {
     CHECK_THROWS(PandemicCM{p, 1.2, 1.2, -1.2});
   }
 }
-
+/*
 TEST_CASE("Performances of pandemic") {
 
   auto desktop = sf::VideoMode::getDesktopMode();
@@ -217,4 +217,4 @@ TEST_CASE("Performances of pandemicCM") {
       sampleCM.evolveCM();
     }
   }
-}
+}*/

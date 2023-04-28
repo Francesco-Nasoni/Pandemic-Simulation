@@ -9,7 +9,7 @@ class Graph {
 private:
   sf::RenderWindow &window;
   std::vector<sf::VertexArray> points;
-  std::vector<sf::Color> color;
+  std::vector<sf::Color> colors;
   std::vector<sf::Text> leg_label;
   std::vector<sf::RectangleShape> leg_rec;
   sf::RectangleShape leg_box;

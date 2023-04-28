@@ -23,7 +23,6 @@ public:
   void evolve();
   Population round() const;
   bool is_ended() const;
-  void round_print(int) const;
 };
 
 #endif

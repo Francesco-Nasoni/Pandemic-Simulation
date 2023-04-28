@@ -3,14 +3,14 @@
 
 Graph::Graph(sf::RenderWindow &m_window, double max_x, double max_y,
              std::vector<sf::Color> colors, std::vector<std::string> titles)
-    : window{m_window}, max_x{max_x}, max_y{max_y}, x_exst{1}, y_exst{1} {
+    : window{m_window}, colors{colors}, max_x{max_x}, max_y{max_y}, x_exst{1},
+      y_exst{1} {
   font.loadFromFile("arial.ttf");
 
   resize(max_x, max_y);
   for (long unsigned int i = 0; i < colors.size(); i++) {
-    sf::VertexArray a;
-    color.push_back(colors[i]);
-    points.push_back(a);
+    sf::VertexArray curve;
+    points.push_back(curve);
     points[i].setPrimitiveType(sf::LineStrip);
     add_to_legend(titles[i], i);
   }
@@ -121,7 +121,7 @@ void Graph::add_point(sf::Vector2f new_point, int i) {
 
   // Add the point to the correct sf::VertexArray and setting the color
   points[i - 1].append(new_point);
-  points[i - 1][points[i - 1].getVertexCount() - 1].color = color[i - 1];
+  points[i - 1][points[i - 1].getVertexCount() - 1].color = colors[i - 1];
 }
 
 void Graph::add_to_legend(std::string str, int i) {
@@ -146,7 +146,7 @@ void Graph::add_to_legend(std::string str, int i) {
   leg_rec.push_back(
       sf::RectangleShape(sf::Vector2f(c_legend_square_l, c_legend_square_l)));
   leg_rec[i].setPosition(rec_pos);
-  leg_rec[i].setFillColor(color[i]);
+  leg_rec[i].setFillColor(colors[i]);
 
   sf::Text tex;
   // Erase every character that exceeds c_legend_n_char

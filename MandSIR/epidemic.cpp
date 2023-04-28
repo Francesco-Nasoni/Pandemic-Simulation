@@ -11,7 +11,8 @@ Epidemic::Epidemic(double s, double i, double b, double y)
   if (Y == 0 && B == 0)
     throw std::runtime_error{"With B=0 and Y=0 nothing will happen"};
   if (s < 0 || i < 0)
-    throw std::runtime_error{"Inizial susceptible < 0 or inizial infected <0 is nonsensical"};
+    throw std::runtime_error{
+        "Inizial susceptible < 0 or inizial infected <0 is nonsensical"};
   if (B < 0 || B > 1 || Y < 0 || Y > 1)
     throw std::runtime_error{"B and Y are probabilities thus they "
                              "must be given in the range [0,1]"};
@@ -54,10 +55,4 @@ bool Epidemic::is_ended() const {
     return true;
   else
     return false;
-}
-
-void Epidemic::round_print(int d) const {
-  Population p1;
-  p1 = round();
-  std::cout << d << '\t' << p1.S << '\t' << p1.I << '\t' << p1.R << std::endl;
 }

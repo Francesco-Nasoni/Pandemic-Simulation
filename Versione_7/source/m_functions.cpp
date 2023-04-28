@@ -1,4 +1,4 @@
-#include "m_functions.hpp"
+#include "../header/m_functions.hpp"
 
 void mf::read_from_config(Pandemic &sample, PandemicCM &sample_CM,
                           int &pop_size, bool &auto_mode, double &quar_trigger,

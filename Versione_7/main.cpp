@@ -29,7 +29,8 @@ int main() {
   quar_count = 0;
   try {
     mf::read_from_config(sample, sample_CM, pop_size, auto_mode, quar_trigger,
-                         quar_goal, quar_max_n, vacc_1_trigger_day, vacc_2_trigger_day);
+                         quar_goal, quar_max_n, vacc_1_trigger_day,
+                         vacc_2_trigger_day);
   } catch (std::runtime_error &e) {
     std::cerr << "ERROR: " << e.what() << '\n';
     exit(0);

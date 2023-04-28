@@ -33,15 +33,15 @@
 #                  - B : attivazione della seconda modalità di vaccinazione.
 
 #   >0 per attivare
-7. Modalità automatica= 0
+7. Modalità automatica= 1
 
 #   I valori di attivazione/disattivazione vengono interpretati come
 #   percentuale di infetti su vivi [ I/(I+S)]
 #   NOTA: settare a 0 per non farla attivare mai
 
-8.  Attivazione quarantena= 0.35
-9.  Disattivazione quarantena= 0.15
-10. Numero massimo di quarantene= 1
+8.  Attivazione quarantena= 0.15
+9.  Disattivazione quarantena= 0.05
+10. Numero massimo di quarantene= 12
 
 #   I valori di attivazione dei vaccini vengono interpretati come giorno
 #   in cui attivare la vaccinazione

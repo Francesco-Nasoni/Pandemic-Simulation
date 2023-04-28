@@ -1,8 +1,20 @@
 #include "epidemic.hpp"
+#include <cmath>
+#include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <stdexcept>
-#include <cmath>
 #include <vector>
+
+void round_print(Population const p, int d) {
+  std::cout << std::left << std::setw(8) << d << std::left << std::setw(12)
+            << p.S << std::left << std::setw(12) << p.I << std::left
+            << std::setw(12) << p.R << std::endl;
+}
+
+void write_on_file(std::ostream &os, Population const p, int d) {
+  os << d << '\t' << p.S << '\t' << p.I << '\t' << p.R << '\n';
+}
 
 int main(int argc, char **argv) {
 
@@ -24,20 +36,26 @@ int main(int argc, char **argv) {
       }
       passed_parameters.push_back(stod(row));
     }
-    sample = Epidemic(std::round(passed_parameters[0]), std::round(passed_parameters[1]),
-                      passed_parameters[2], passed_parameters[3]);
+    sample = Epidemic(std::round(passed_parameters[0]),
+                      std::round(passed_parameters[1]), passed_parameters[2],
+                      passed_parameters[3]);
   } catch (std::runtime_error &e) {
     std::cerr << "ERROR: " << e.what() << '\n';
     exit(0);
   }
 
+  std::ofstream file{"Result.txt", std::ofstream::trunc};
+
   std::cout << std::endl
-            << "Day" << '\t' << "Susceptible" << '\t' << "Infected" << '\t'
-            << "Removed" << '\n';
-  sample.round_print(0);
+            << std::left << std::setw(8) << "Day" << std::left << std::setw(12)
+            << "Susceptible" << std::left << std::setw(12) << "Infected"
+            << std::left << std::setw(12) << "Removed" << std::endl;
+  round_print(sample.round(), 0);
+  write_on_file(file, sample.round(), 0);
 
   for (int i = 0; !sample.is_ended(); i++) {
     sample.evolve();
-    sample.round_print(i);
+    round_print(sample.round(), i);
+    write_on_file(file, sample.round(), 0);
   }
 }
