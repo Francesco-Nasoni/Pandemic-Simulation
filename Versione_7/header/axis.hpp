@@ -6,12 +6,10 @@
 #include <string>
 #include <vector>
 
-constexpr int c_div_rect_length = 7;
-constexpr int c_font_size = 16;
-constexpr double c_arial_ratio = 0.57;
-constexpr int c_label_offset = 3;
-
 enum class Direction : bool { x, y };
+
+constexpr double c_arial_ratio = 0.57;
+constexpr int c_font_size = 16;
 
 class Axis {
 private:
@@ -21,6 +19,9 @@ private:
   sf::Font font;
 
 public:
+  static constexpr int c_div_rect_length = 7;
+  static constexpr int c_label_offset = 3;
+
   Axis(double max, double length, double width, int n_div, double x, double y,
        Direction direction);
   Axis();

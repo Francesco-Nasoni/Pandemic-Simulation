@@ -1,4 +1,4 @@
-#include "axis.hpp"
+#include "../header/axis.hpp"
 
 Axis::Axis(double max, double length, double width, int n_div, double x,
            double y, Direction direction) {
