@@ -3,7 +3,7 @@
 #include <iostream>
 #include <random>
 
-#include "pandemicCM.hpp"
+#include "../header/pandemicCM.hpp"
 
 PandemicCM::PandemicCM(const Pandemic &p, double V_B_E, double V_Y_E,
                        double V_R_E)

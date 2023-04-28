@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <iostream>
 
-#include "pandemic.hpp"
+#include "../header/pandemic.hpp"
 
 Pandemic::Pandemic(int n, double b, double y, double r, double social,
                    double in_infect_probability)

@@ -82,7 +82,7 @@ void mf::add_point(Graph &graph, Pandemic const &p, int d) {
 }
 
 void mf::process_event(sf::RenderWindow &window, sf ::Event const &event,
-                      PandemicCM &p, bool auto_mode, int &quar_count) {
+                       PandemicCM &p, bool auto_mode, int &quar_count) {
   if (event.type == sf::Event::KeyPressed) {
     if (!auto_mode) {
       switch (event.key.code) {

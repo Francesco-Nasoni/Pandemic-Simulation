@@ -1,4 +1,4 @@
-#include "person.hpp"
+#include "../header/person.hpp"
 
 int Person::get_social() const { return sociality; }
 
