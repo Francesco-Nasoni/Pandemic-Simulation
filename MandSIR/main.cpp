@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <vector>
 
-void round_print(Population const p, int d) {
+void print(Population const p, int d) {
   std::cout << std::left << std::setw(8) << d << std::left << std::setw(12)
             << p.S << std::left << std::setw(12) << p.I << std::left
             << std::setw(12) << p.R << std::endl;
@@ -50,12 +50,12 @@ int main(int argc, char **argv) {
             << std::left << std::setw(8) << "Day" << std::left << std::setw(12)
             << "Susceptible" << std::left << std::setw(12) << "Infected"
             << std::left << std::setw(12) << "Removed" << std::endl;
-  round_print(sample.round(), 0);
+  print(sample.round(), 0);
   write_on_file(file, sample.round(), 0);
 
   for (int i = 0; !sample.is_ended(); i++) {
     sample.evolve();
-    round_print(sample.round(), i);
+    print(sample.round(), i);
     write_on_file(file, sample.round(), 0);
   }
 }
