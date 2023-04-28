@@ -66,9 +66,9 @@ int main() {
 
     sf::Event event;
     while (window.pollEvent(event))
-      mf::proces_event(window, event, sample_CM, auto_mode, quar_count);
+      mf::process_event(window, event, sample_CM, auto_mode, quar_count);
     while (window_CM.pollEvent(event))
-      mf::proces_event(window_CM, event, sample_CM, auto_mode, quar_count);
+      mf::process_event(window_CM, event, sample_CM, auto_mode, quar_count);
 
     if (!sample.is_ended()) {
       day++;

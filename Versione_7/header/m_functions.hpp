@@ -21,10 +21,10 @@ void read_from_config(Pandemic &sample, PandemicCM &sample_CM, int &pop_size,
                       int &vacc_2_trigger);
 void render(sf::RenderWindow &window, Graph &graph);
 void add_point(Graph &graph, Pandemic const &p, int d);
-void proces_event(sf::RenderWindow &window, sf ::Event const &event,
+void process_event(sf::RenderWindow &window, sf ::Event const &event,
                   PandemicCM &p, bool auto_mode, int &q_c);
 void write(std::ostream &os, Pandemic const &sample, int d);
 void print(Pandemic const &s1, Pandemic const &s2, int d1, int d2, int q_c);
-} // namespace mf
+}
 
 #endif
