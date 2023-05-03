@@ -38,6 +38,10 @@ Plot
 Pro2
 .vscode
 
-#unused bash
+#results
+Result.txt
+ResultCM.txt
+
+#usless bash
 simulation.sh
 test.sh
