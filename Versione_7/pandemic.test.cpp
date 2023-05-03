@@ -1,5 +1,5 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+#include "header/doctest.h"
 
 #include "header/graph.hpp"
 #include "header/m_functions.hpp"
