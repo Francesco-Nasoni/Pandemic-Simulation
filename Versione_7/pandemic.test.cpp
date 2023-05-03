@@ -1,10 +1,10 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-#include "graph.hpp"
-#include "m_functions.hpp"
-#include "pandemic.hpp"
-#include "pandemicCM.hpp"
+#include "header/graph.hpp"
+#include "header/m_functions.hpp"
+#include "header/pandemic.hpp"
+#include "header/pandemicCM.hpp"
 
 #include <chrono>
 #include <iostream>
