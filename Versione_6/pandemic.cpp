@@ -3,7 +3,8 @@
 
 #include "pandemic.hpp"
 
-Pandemic::Pandemic(int n, double b, double y, double r, double social, double in_infect_probability)
+Pandemic::Pandemic(int n, double b, double y, double r, double social,
+                   double in_infect_probability)
     : N{n}, S{N}, I{0}, D{0}, m_social{social}, B{b}, Y{y}, R{r} {
 
   if (N <= 0)

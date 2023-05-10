@@ -9,23 +9,7 @@
 #include <chrono>
 #include <iostream>
 
-struct Timer {
-
-  std::chrono::time_point<std::chrono::steady_clock> start;
-  std::chrono::time_point<std::chrono::steady_clock> end;
-  std::chrono::duration<double, std::milli> duration;
-
-  Timer() { start = std::chrono::steady_clock::now(); };
-
-  ~Timer() {
-    end = std::chrono::steady_clock::now();
-    duration = end - start;
-    double time = duration.count();
-    std::cout << time << "ms" << '\n';
-  };
-};
-
-TEST_CASE("Pandemic throw test") {
+TEST_CASE("Pandemic tests") {
 
   SUBCASE("N negative") { CHECK_THROWS(Pandemic{-100, 0.5, 0.5, 0.5, 4, 0.5}); }
   SUBCASE(" Invalid B") { CHECK_THROWS(Pandemic{100, 12, 0.5, 0.5, 4, 0.5}); }
@@ -78,7 +62,7 @@ TEST_CASE("Pandemic throw test") {
   }
 }
 
-TEST_CASE("PancdemicCM.cpp") {
+TEST_CASE("PancdemicCM tests") {
   Pandemic p{100, 0.5, 0.5, 0.5, 4, 0.5};
   SUBCASE("Invalid vacc_B_effect") {
     CHECK_THROWS(PandemicCM{p, -1.2, 1.2, 1.2});
