@@ -23,10 +23,10 @@
 
 #   SIMULAZIONE CON CONTROMISURE
 #   La simulazione delle contromisure può avvenire in due modalità :
-#   --AUTOMATICA:  vengono utilizzati i parametri di input per l'attivaizone
+#   --AUTOMATICA:  vengono utilizzati i parametri di input per l'attivazione
 #                   e la disattivazione della quarantena e per l'attivazione
 #                   delle due modalità di vaccinazione
-#   --MANUALE:     vengono igorati i valori di attivazione automatica e vengono
+#   --MANUALE:     vengono ignorati i valori di attivazione automatica e vengono
 #                  usati input da tastiera per l'attivaizone manuale:
 #                  - Q : attivazione/disattivazione delle quarantene
 #                  - V : attivazione prima modalità di vaccinazione
@@ -48,7 +48,7 @@
 #   NOTA: settare a 0 per non farle attivare mai
 
 #   Modalità 1 è la modalità in cui vengono vaccinati solo gli individui
-#   con socialità più alta della media
+#   con socialità più alta della media più una sigma
 
 11. Attivazione vaccinazione 1= 300
 

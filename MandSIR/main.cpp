@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
   print(sample.round(), 0);
   write_on_file(file, sample.round(), 0);
 
-  for (int i = 0; !sample.is_ended(); i++) {
+  for (int i = 1; !sample.is_ended(); i++) {
     sample.evolve();
     print(sample.round(), i);
     write_on_file(file, sample.round(), 0);

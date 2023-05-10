@@ -59,7 +59,7 @@ int main() {
 
   mf::print(sample, sample_CM, 0, 0, 0);
 
-  for (int day = 0, day_CM = 0; window.isOpen() || window_CM.isOpen() ||
+  for (int day = 1, day_CM = 1; window.isOpen() || window_CM.isOpen() ||
                                 !sample.is_ended() || !sample_CM.is_ended();) {
 
     ch_steady_clock start = std::chrono::steady_clock::now();
